@@ -109,3 +109,59 @@ by the number of flights each passenger has taken on the airline from most to le
 
 (Note: you should only make 1 database query to retrieve the sorted list of passengers)
 ```
+
+## Data You Can Use
+
+Airlines:
+
+Name: American
+Name: Delta
+Name: JetBlue
+Name: Southwest
+Name: United
+
+
+Flights:
+
+Number: 7990
+Date: 2/7/2022
+Departure City: Glendale
+Arrival City: Dallas
+
+Number: 3940
+Date: 3/10/2022
+Departure City: Detroit
+Arrival City: Orlando
+
+Number: 9091
+Date:  5/17/2022
+Departure City: Chicago
+Arrival City: Kansas City
+
+Number: 6798
+Date:  10/9/2022
+Departure City: Tulsa
+Arrival City: Fresno
+
+Number: 9665
+Date:  11/22/2022
+Departure City: Durham
+Arrival City: New Orleans
+
+People: 
+
+Name: Tina Belcher
+Age: 13
+
+Name: Louise Belcher
+Age: 9
+
+Name: Bob Belcher
+Age: 46
+
+Name: Linda Belcher
+Age: 44
+
+Name: Big Bob
+Age: 84
+

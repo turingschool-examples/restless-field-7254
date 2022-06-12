@@ -2,7 +2,7 @@
 
 Base repository for B2 assessments and diagnostics.
 
-This repository requires and has been tested on Ruby v2.5.3 and is based on Rails 5.2.5
+This repository requires and has been tested on Ruby v2.7.4 and is based on Rails 5.2.x
 
 RSpec and Shoulda-Matchers have been installed and set up.
 
@@ -155,19 +155,19 @@ Arrival City: New Orleans
 
 People: 
 
-Name: Tina Belcher
+Name: Brennan Lee Mulligan
 Age: 13
 
-Name: Louise Belcher
+Name: Aabria Iyengar
 Age: 9
 
-Name: Bob Belcher
+Name: Bill Seacaster
 Age: 46
 
-Name: Linda Belcher
+Name: Misty Moore
 Age: 44
 
-Name: Big Bob
+Name: Kingston Brown
 Age: 84
 
 ```

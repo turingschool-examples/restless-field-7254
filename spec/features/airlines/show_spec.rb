@@ -26,15 +26,18 @@ RSpec.describe Airlines: :Show do
   it 'shows a unique list of adult passengers that have flights on the airline' do
     visit airline_path(@airline)
 
+    within '#passengers' do
     expect(page).to have_content(@passenger1.name, count: 1)
     expect(page).to have_content(@passenger2.name, count: 1)
     expect(page).to have_content(@passenger4.name, count: 1)
     expect(page).to_not have_content(@passenger3.name)
+    end
   end
 
   it 'shows a unique list of adult passengers that have flights on the airline ordered by number of flights' do
     visit airline_path(@airline)
 
+    within '#passengers' do
     expect(page).to have_content(@passenger1.name, count: 1)
     expect(page).to have_content(@passenger2.name, count: 1)
     expect(page).to have_content(@passenger4.name, count: 1)
@@ -43,5 +46,6 @@ RSpec.describe Airlines: :Show do
     expect(@passenger1.name).to appear_before(@passenger2.name)
     expect(@passenger1.name).to appear_before(@passenger4.name)
     expect(@passenger4.name).to appear_before(@passenger2.name)
+    end
   end
 end

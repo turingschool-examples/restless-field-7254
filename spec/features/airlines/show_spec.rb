@@ -9,6 +9,7 @@ RSpec.describe "arilines show page" do
     @flight_1 = @american.flights.create!(number: 7990, date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
     @flight_2 = @american.flights.create!(number: 3940, date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando")
     @flight_3 = @delta.flights.create!(number: 9091, date: "5/17/2022", departure_city: "Chicago", arrival_city: "Kansas City")
+    @flight_4 = @american.flights.create!(number: 1420, date: "5/31/2022", departure_city: "LA", arrival_city: "NY")
 
     @pass_1 = Passenger.create!(name: "Jane Powell", age: 18)
     @pass_2 = Passenger.create!(name: "John Smith", age: 30)
@@ -19,8 +20,11 @@ RSpec.describe "arilines show page" do
     FlightPassenger.create!(flight: @flight_1, passenger: @pass_1)
     FlightPassenger.create!(flight: @flight_1, passenger: @pass_2)
     FlightPassenger.create!(flight: @flight_2, passenger: @pass_3)
+    FlightPassenger.create!(flight: @flight_1, passenger: @pass_3)
+    FlightPassenger.create!(flight: @flight_4, passenger: @pass_3)
     FlightPassenger.create!(flight: @flight_3, passenger: @pass_4)
     FlightPassenger.create!(flight: @flight_1, passenger: @pass_5)
+    FlightPassenger.create!(flight: @flight_2, passenger: @pass_1)
   end
 
   it "dispays unique list of adult passengers" do
@@ -31,5 +35,25 @@ RSpec.describe "arilines show page" do
     expect(page).to have_content("Kathryn Grayson")
     expect(page).to_not have_content("Shirley Temple")
     expect(page).to_not have_content("Kate Smith")
+  end
+
+  it "displays the passengers sorted by number of flights" do
+    visit "/airlines/#{@american.id}"
+
+    within "#passenger-0" do
+      expect(page).to have_content("Kathryn Grayson, 3 flights")
+      expect(page).to_not have_content("John Smith, 1 flights")
+      expect(page).to_not have_content("Jane Powell, 2 flights")
+    end
+    within "#passenger-1" do
+      expect(page).to have_content("Jane Powell, 2 flights")
+      expect(page).to_not have_content("John Smith, 1 flights")
+      expect(page).to_not have_content("Kathryn Grayson, 3 flights")
+    end
+    within "#passenger-2" do
+      expect(page).to have_content("John Smith, 1 flights")
+      expect(page).to_not have_content("Jane Powell, 2 flights")
+      expect(page).to_not have_content("Kathryn Grayson, 3 flights")
+    end
   end
 end

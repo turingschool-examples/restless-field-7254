@@ -28,8 +28,8 @@ RSpec.describe Airline, type: :model do
       end
 
       it "returns all passengers that have flights on the airline that are 18 or older" do
-        expect(@american.adult_passengers).to eq(["Jane Powell", "John Smith", "Kathryn Grayson"])
-        expect(@delta.adult_passengers).to eq(["Kate Smith"])
+        expect(@american.adult_passengers.map{|pass| pass.id}).to eq([@pass_1.id, @pass_2.id, @pass_3.id])
+        expect(@delta.adult_passengers.map{|pass| pass.id}).to eq([@pass_4.id])
       end
     end
   end

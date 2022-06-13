@@ -33,7 +33,7 @@ RSpec.describe 'Airline show page', type: :model do
     @passenger7.passenger_flights.create!(flight_id: @flight5.id)
   end
 
-  it 'shows a unique list of adult passengers on any flight by this airline' do
+  it 'shows a list of adult passengers on any flight by this airline' do
     visit "/airlines/#{@united.id}"
 
     expect(page).to have_content("Jimbob")
@@ -43,5 +43,12 @@ RSpec.describe 'Airline show page', type: :model do
     expect(page).to have_content("Parker")
     expect(page).to have_content("Deannah")
     expect(page).to_not have_content("Helen")
+  end
+
+  it 'has no duplicate listings of passengers' do
+    visit "/airlines/#{@united.id}"
+
+    expect(page.all('.airlinePassenger').length).to eq(5)
+    expect(page.all('.airlinePassenger')[5]).to eq(nil)
   end
 end

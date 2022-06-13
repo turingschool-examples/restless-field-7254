@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Airline, type: :model do
   describe 'relationships' do
     it { should have_many :flights }
-    it { should have_many :passengers, through: :flights }
+    it { should have_many(:passengers).through(:flights) }
   end
   describe 'behaviors' do
     it 'can return all adult passengers' do
@@ -33,8 +33,8 @@ RSpec.describe Airline, type: :model do
       pass8 = Passenger.create(name: 'Kelp Kenwood', age: 45)
       pass9 = Passenger.create(name: 'Jorge Jorgenson', age: 45)
       pass10 = Passenger.create(name: 'Loop Lensfield', age: 45)
-      pass11 = Passenger.create(name: 'Tommy Twoshoes', age: 45)
-      pass12 = Passenger.create(name: 'Little Guy', age: 45)
+      pass11 = Passenger.create(name: 'Tommy Twoshoes', age: 16)
+      pass12 = Passenger.create(name: 'Little Guy', age: 1)
 
       PassengerFlight.create(passenger_id: pass1.id, flight_id: flight1.id)
       PassengerFlight.create(passenger_id: pass1.id, flight_id: flight3.id)
@@ -51,8 +51,8 @@ RSpec.describe Airline, type: :model do
       PassengerFlight.create(passenger_id: pass11.id, flight_id: flight2.id)
       PassengerFlight.create(passenger_id: pass12.id, flight_id: flight3.id)
 
-      expect(airline1.adult_passengers).to match_array(['John Wisbrook', 'Kate Wisbrook', 'Alex Spoop',
-                                                        'Caren Longsby'])
+      expect(airline1.adult_passengers).to match_array([pass1, pass2, pass3,
+                                                        pass4, pass10])
     end
   end
 end

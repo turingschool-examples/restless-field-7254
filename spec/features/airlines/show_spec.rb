@@ -28,8 +28,8 @@ RSpec.describe 'airline show page' do
     pass8 = Passenger.create(name: 'Kelp Kenwood', age: 45)
     pass9 = Passenger.create(name: 'Jorge Jorgenson', age: 45)
     pass10 = Passenger.create(name: 'Loop Lensfield', age: 45)
-    pass11 = Passenger.create(name: 'Tommy Twoshoes', age: 45)
-    pass12 = Passenger.create(name: 'Little Guy', age: 45)
+    pass11 = Passenger.create(name: 'Tommy Twoshoes', age: 16)
+    pass12 = Passenger.create(name: 'Little Guy', age: 1)
 
     PassengerFlight.create(passenger_id: pass1.id, flight_id: flight1.id)
     PassengerFlight.create(passenger_id: pass1.id, flight_id: flight3.id)

@@ -103,7 +103,7 @@ RSpec.describe Flight, type: :feature do
       # And I no longer see that passenger listed under that flight
       #
       # (Note: you should not destroy the passenger record entirely)
-
+      # binding.pry
       visit "/flights"
 
       # save_and_open_page

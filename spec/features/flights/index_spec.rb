@@ -120,6 +120,7 @@ RSpec.describe 'the Flight Index page', type: :feature do
     FlightPassenger.create!(flight: flight3, passenger: jordan)
     FlightPassenger.create!(flight: flight4, passenger: jes)
     FlightPassenger.create!(flight: flight4, passenger: nadine)
+    FlightPassenger.create!(flight: flight4, passenger: mike)
 
     visit "/flights"
       within("#flight-#{flight1.id}") do
@@ -130,6 +131,11 @@ RSpec.describe 'the Flight Index page', type: :feature do
         expect(current_path).to eq("/flights")
         expect(page).to have_content("Dani")
         expect(page).to_not have_content("Mike")
-      end
+
+        # within("#flight-#{flight4.id}") do
+        #   expect(page).to have_content("Mike")
+        # end
+        #Trying to sad path to make sure I didn't destroy Mike passenger record entirely but can't get it to work with within block/div placement. Mike shows up in capybara with a save_and_open_page under flight 4!
+    end
   end
 end

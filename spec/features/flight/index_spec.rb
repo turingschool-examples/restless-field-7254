@@ -19,6 +19,13 @@ RSpec.describe 'Flights index page', type: :feature do
     @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_1.id)
     @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_1.id)
     @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_1.id)
+
+    @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_2.id)
+    @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_2.id)
+    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_2.id)
+
+    @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_3.id)
+    @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_3.id)
   end
 
   it 'displays the list of flight numbers, and beneath each number we see the passengers' do
@@ -32,6 +39,25 @@ RSpec.describe 'Flights index page', type: :feature do
       expect(page).to have_content('Ryan')
       expect(page).to have_content('Stacy')
       expect(page).to have_content('Maddie')
+    end
+
+    within "#flight-#{@flight_2.id}" do
+      expect(page).to have_content('Flight Number: 5544')
+      expect(page).to have_content('Airline: Southwest')
+      expect(page).to have_content('Passengers:')
+      expect(page).to have_content('Ryan')
+      expect(page).to have_content('Stacy')
+      expect(page).to have_content('Maddie')
+    end
+
+    within "#flight-#{@flight_3.id}" do
+      expect(page).to have_content('Flight Number: 5545')
+      expect(page).to have_content('Airline: Southwest')
+      expect(page).to have_content('Passengers:')
+      expect(page).to have_content('Ryan')
+      expect(page).to have_content('Stacy')
+      expect(page).to_not have_content('Maddie')
+      expect(page).to_not have_content('Jack')
     end
   end
 

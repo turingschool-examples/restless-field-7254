@@ -1,7 +1,7 @@
 <h4><%= @airline.name %></h4>
 
 <p>Passengers: </p>
-<% @airline.passengers.each do |ilda| %>
+<% @airline.age_limiter.each do |ilda| %>
  name: <%= ilda.name %>
  age: <%= ilda.age %>
 <% end %>

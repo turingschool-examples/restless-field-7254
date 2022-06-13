@@ -53,6 +53,7 @@ RSpec.describe 'Flights index page', type: :model do
       expect(page).to have_content("Parker")
       expect(page).to have_content("Deannah")
       expect(page).to have_content("Casey")
+      expect(page).to_not have_content("Pepsi")
     end
   end
 end

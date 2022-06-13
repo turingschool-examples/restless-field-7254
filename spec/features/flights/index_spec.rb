@@ -1,11 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'rails_helper'
 
+RSpec.describe Flights: :Index do
+  before :each do
     @airline = Airline.create!(name: 'Frontier')
     @flight1 = Flight.create!(number: '1727', date: '08/03/20', departure_city: 'Denver',
                               arrival_city: 'Reno', airline_id: @airline.id)
@@ -21,3 +17,32 @@
     @pf2 = PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight1.id)
     @pf3 = PassengerFlight.create!(passenger_id: @passenger3.id, flight_id: @flight2.id)
     @pf3 = PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight2.id)
+  end
+
+  it 'shows a list of all flights and the passengers on thos flights' do
+    visit flights_path
+
+    expect(page).to have_content(@flight1.number)
+    expect(page).to have_content(@flight2.number)
+    expect(page).to have_content(@flight3.number)
+    expect(page).to have_content(@flight1.airline.name)
+
+    within "#passengers", match: :first do
+      expect(page).to have_content(@passenger1.name)
+      expect(page).to have_content(@passenger2.name)
+      expect(page).to_not have_content(@passenger3.name)
+      expect(page).to_not have_content(@passenger4.name)
+    end
+  end
+
+  it 'shows a button to remove a passenger from a flight' do
+    visit flights_path
+
+    within '#passengers', match: :first do
+      click_link('Remove this passenger', match: :first)
+
+      expect(current_path).to eq(flights_path)
+      expect(page).to_not have_content(@passenger1.name)
+    end
+  end
+end

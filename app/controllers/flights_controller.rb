@@ -11,14 +11,8 @@ class FlightsController < ApplicationController
     elsif params[:update_status_to] == "added"
       passenger.added!
       redirect_to flights_path
-    elsif passenger.update(passenger_params)
+    elsif passenger.update(status: params[:status])
       redirect_to flights_path
     end
   end
-
-  private
-    def passenger_params
-      params.require(:passenger).permit(:name, :age, :status)
-
-    end
 end

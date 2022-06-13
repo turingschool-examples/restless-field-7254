@@ -1,0 +1,5 @@
+<h1><%= @airline.name %> Show Page</h1>
+<p>Airline Passengers:</p>
+<% @airline.all_adult_passengers_sorted.each do |pass| %>
+<p class ="airlinePassenger"><%= pass.name %></p>
+<% end %>

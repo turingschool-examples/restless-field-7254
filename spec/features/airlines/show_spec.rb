@@ -110,7 +110,6 @@ RSpec.describe 'airline show page' do
     PassengerFlight.create(passenger_id: pass12.id, flight_id: flight3.id)
 
     visit airline_path(airline1.id)
-
     expect('Kate Wisbrook').to appear_before('John Wisbrook')
     expect('John Wisbrook').to appear_before('Alex Spoop')
     expect('Alex Spoop').to appear_before('Caren Longsby')

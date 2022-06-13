@@ -103,8 +103,8 @@ RSpec.describe Airline, type: :model do
       PassengerFlight.create(passenger_id: pass11.id, flight_id: flight2.id)
       PassengerFlight.create(passenger_id: pass12.id, flight_id: flight3.id)
 
-      expect(airline1.frequent_flyers).to match_array([pass2, pass1, pass3,
-                                                       pass4, pass10])
+      expect(airline1.frequent_adult_flyers).to match_array([pass2, pass1, pass3,
+                                                             pass4, pass5, pass6, pass7, pass10])
     end
   end
 end

@@ -67,11 +67,12 @@ RSpec.describe 'Flights index page', type: :model do
     end
   end
 
-  it 'remove passenger redirects to flight index, and passnger clicked is no longer shown' do
+  it 'remove passenger redirects to flight index, and passenger clicked is no longer shown' do
     visit "/flights"
 
+
     within "#flightDetails#{@flight2.id}" do
-      within "passenger-#{@passenger2.id}" do
+      within "#passenger-#{@passenger2.id}" do
         click_link("Remove Passenger")
       end
     end

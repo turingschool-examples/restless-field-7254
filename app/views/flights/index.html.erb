@@ -3,7 +3,7 @@
     <p><%= flight.number %> <%= flight.airline.name %></p>
     <div id='passengers'>
     <% flight.passenger_flights.each do |pf| %>
-        <p><%= pf.passenger.name %><%= link_to "Remove this passenger", passenger_flight_path(pf), method: :delete  %></p>
+        <p><%= pf.passenger.name %> <%= link_to "Remove this passenger", passenger_flight_path(pf), method: :delete  %></p>
     <% end %>
     </div>
 <% end %>

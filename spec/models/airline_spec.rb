@@ -19,6 +19,6 @@ end
       passenger5 = flight2.passengers.create(name: "Dunkin", age: 35)
       passenger6 = flight3.passengers.create(name: "Albert", age: 52)
 
-    expect(airline1.unique_and_above_18).to eq([passenger1, passenger4])
+    expect(airline1.unique_and_above_18).to eq([passenger5.name, passenger4.name, passenger1.name])
   end
 end

@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :flights do
     resources:passengers, only: %i[destroy], controller: 'flight_passengers'
   end
+
+  resources :airlines, only: [:show]
 end

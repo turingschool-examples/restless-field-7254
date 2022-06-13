@@ -7,7 +7,6 @@ class FlightsController < ApplicationController
     flight = Flight.find(params[:flight_id])
     passenger = Passenger.find(params[:passenger_id])
     fp = FlightPassenger.find_by(flight_id: "#{flight.id}", passenger_id: "#{passenger.id}")
-    require "pry"; binding.pry
     fp.destroy
     redirect_to '/flights'
   end

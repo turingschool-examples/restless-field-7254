@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'airlines show page' do
-  it 'has a unique list of adult passengers' do
+  xit 'has a unique list of adult passengers' do
     @american = Airline.create!(name: 'American')
     @delta = Airline.create!(name: 'Delta')
     @jetblue = Airline.create!(name: 'JetBlue')
@@ -27,8 +27,6 @@ RSpec.describe 'airlines show page' do
 
     
     visit "/airlines/#{@american.id}"
-    save_and_open_page
-    require "pry"; binding.pry
     expect(page).to have_content("Bill Seacaster")
     expect(page).to have_content("Misty Moore")
     expect(page).to have_content("Kingston Brown")

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'flights#index' do
+RSpec.describe 'flights#index', type: :feature do
   before :each do
     @a1 = Airline.create!(name: 'airline1')
     @f1 = Flight.create!(number: '1', date: '1/1/11', departure_city: 'Pensacola', arrival_city: 'Norfolk',
@@ -17,11 +17,11 @@ RSpec.describe 'flights#index' do
     @p4 = Passenger.create!(name: 'Bob', age: 15)
     @fp3 = FlightPassenger.create!(flight_id: @f2.id, passenger_id: @p3.id)
     @fp4 = FlightPassenger.create!(flight_id: @f2.id, passenger_id: @p4.id)
+
+    visit flights_path
   end
 
   it 'should list all flight numbers/airlines/passengers' do
-    visit flights_path
-
     within "#flight-#{@f1.id}" do
       expect(page).to have_content(@f1.number)
       expect(page).to have_content(@a1.name)
@@ -37,8 +37,6 @@ RSpec.describe 'flights#index' do
   end
 
   it 'should have a link to remove passenger from a flight' do
-    visit flights_path
-
     within "#flight-#{@f1.id}" do
       expect(page).to have_content(@p1.name)
       expect(page).to have_content(@p2.name)

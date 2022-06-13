@@ -1,10 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
-end
-
-describe 'Instance Methods' do
+RSpec.describe "Airlines show page" do
   before :each do
     @airline1 = Airline.create!(name: "American")
 
@@ -22,10 +18,21 @@ describe 'Instance Methods' do
     @fp3 = FlightPassenger.create!(passenger_id: "#{@bill.id}", flight_id: "#{@flight1.id}")
     @fp4 = FlightPassenger.create!(passenger_id: "#{@misty.id}", flight_id: "#{@flight1.id}")
     @fp5 = FlightPassenger.create!(passenger_id: "#{@misty.id}", flight_id: "#{@flight2.id}")
+
+    visit airline_path(@airline1)
   end
 
-  it "#passengers_over_18_by_frequency" do
-    expect(@airline1.passengers_over_18_by_frequency[0].name).to eq("Misty Moore")
-    expect(@airline1.passengers_over_18_by_frequency[1].name).to eq("Bill Seacaster")
+  it "lists passengers over 18 that have flights with airline" do
+    expect(page).to have_content(@bill.name)
+    expect(page).to have_content(@misty.name)
+
+    expect(page).to_not have_content(@bre.name)
+    expect(page).to_not have_content(@aab.name)
+    expect(page).to_not have_content(@colin.name)
   end
+
+  it "orders passengers by most frequent" do
+    expect(@misty.name).to appear_before(@bill.name)
+  end
+
 end

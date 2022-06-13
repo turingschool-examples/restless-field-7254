@@ -15,15 +15,13 @@ RSpec.describe "Flights Index Page" do
   let!(:passenger_5) { Passenger.create!(name: "Kingston Brown", age: 84) }
 
   let!(:pass_flight_1) { PassengerFlight.create!(passenger: passenger_1, flight: flight_1) }
-  let!(:pass_flight_2) { PassengerFlight.create!(passenger: passenger_1, flight: flight_2) }
-  let!(:pass_flight_3) { PassengerFlight.create!(passenger: passenger_1, flight: flight_3) }
-  let!(:pass_flight_4) { PassengerFlight.create!(passenger: passenger_2, flight: flight_1) }
-  let!(:pass_flight_5) { PassengerFlight.create!(passenger: passenger_2, flight: flight_2) }
-  let!(:pass_flight_6) { PassengerFlight.create!(passenger: passenger_2, flight: flight_3) }
-  let!(:pass_flight_7) { PassengerFlight.create!(passenger: passenger_2, flight: flight_4) }
-  let!(:pass_flight_8) { PassengerFlight.create!(passenger: passenger_3, flight: flight_2) }
-  let!(:pass_flight_9) { PassengerFlight.create!(passenger: passenger_4, flight: flight_3) }
-  let!(:pass_flight_10) { PassengerFlight.create!(passenger: passenger_4, flight: flight_4) }
+  let!(:pass_flight_2) { PassengerFlight.create!(passenger: passenger_2, flight: flight_2) }
+  let!(:pass_flight_3) { PassengerFlight.create!(passenger: passenger_3, flight: flight_1) }
+  let!(:pass_flight_4) { PassengerFlight.create!(passenger: passenger_3, flight: flight_3) }
+  let!(:pass_flight_5) { PassengerFlight.create!(passenger: passenger_4, flight: flight_4) }
+  let!(:pass_flight_6) { PassengerFlight.create!(passenger: passenger_4, flight: flight_2) }
+  let!(:pass_flight_7) { PassengerFlight.create!(passenger: passenger_4, flight: flight_3) }
+  let!(:pass_flight_8) { PassengerFlight.create!(passenger: passenger_5, flight: flight_3) }
 
   it "lists all flight numbers, the name of their airline, and the names of all passengers on that flight" do
     visit flights_path
@@ -32,15 +30,14 @@ RSpec.describe "Flights Index Page" do
       expect(page).to have_content('Flight 7990')
       expect(page).to have_content('Delta')
       expect(page).to have_content('Brennan Lee Mulligan')
-      expect(page).to have_content('Abria Iyengar')
+      expect(page).to have_content('Bill Seacaster')
     end
 
     within "#flight-#{flight_2.id}" do
       expect(page).to have_content('Flight 3940')
       expect(page).to have_content('Delta')
-      expect(page).to have_content('Brennan Lee Mulligan')
       expect(page).to have_content('Abria Iyengar')
-      expect(page).to have_content('Bill Seacaster')
+      expect(page).to have_content('Misty Moore')
     end
   end
 

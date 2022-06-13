@@ -38,9 +38,9 @@ RSpec.describe 'Flights index page', type: :feature do
   it 'allows for the removal of a passenger from a fligt' do
     visit flights_path
 
-    expect(page).to have_link('Remove Passenger From Flight')
 
     within "#passenger-#{@passenger_1.name}" do
+      expect(page).to have_link('Remove Passenger From Flight')
       click_on 'Remove Passenger From Flight'
     end
 

@@ -72,7 +72,6 @@ RSpec.describe "Airline Show View", type: :feature do
     let!(:passenger3) { Passenger.create(name: "Bill Seacaster", age: 46) }
     let!(:passenger4) { Passenger.create(name: "Misty Moore", age: 44) }
     let!(:passenger5) { Passenger.create(name: "Kingston Brown", age: 84) }
-
     let!(:passenger6) { Passenger.create(name: "Uncle Carbuncle", age: 99) }
 
     let!(:american) { Airline.create(name: "American") }
@@ -86,7 +85,6 @@ RSpec.describe "Airline Show View", type: :feature do
     let!(:flight3) { Flight.create(number: "9091", date:  "5/17/2022", departure_city: "Chicago", arrival_city: "Kansas City", airline: jetblue) }
     let!(:flight4) { Flight.create(number: "6798", date:  "10/9/2022", departure_city: "Tulsa", arrival_city: "Fresno", airline: southwest) }
     let!(:flight5) { Flight.create(number: "9665", date:  "11/22/2022", departure_city: "Durham", arrival_city: "New Orleans", airline: united) }
-
     let!(:flight6) { Flight.create(number: "4242", date:  "11/13/2022", departure_city: "Los Angeles", arrival_city: "Denver", airline: american) }
     let!(:flight7) { Flight.create(number: "4224", date:  "11/13/2021", departure_city: "Denver", arrival_city: "Los Angeles", airline: american) }
     let!(:flight8) { Flight.create(number: "2442", date:  "11/13/2015", departure_city: "Xanadu", arrival_city: "Oz", airline: american) }
@@ -111,7 +109,6 @@ RSpec.describe "Airline Show View", type: :feature do
     let!(:flight_passenger18) { FlightPassenger.create(flight: flight3, passenger: passenger1) }
     let!(:flight_passenger19) { FlightPassenger.create(flight: flight4, passenger: passenger2) }
     let!(:flight_passenger20) { FlightPassenger.create(flight: flight5, passenger: passenger3) }
-
     let!(:flight_passenger21) { FlightPassenger.create(flight: flight6, passenger: passenger6) }
     let!(:flight_passenger22) { FlightPassenger.create(flight: flight6, passenger: passenger2) }
     let!(:flight_passenger23) { FlightPassenger.create(flight: flight6, passenger: passenger3) }

@@ -10,4 +10,9 @@ class Flight < ApplicationRecord
   def flyable_passengers
     passengers.where(status: true)
   end
+
+  def flyable_adults
+    passengers.where(status: true)
+    .where('age >= 18')
+  end
 end

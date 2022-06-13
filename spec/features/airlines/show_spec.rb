@@ -23,12 +23,19 @@ RSpec.describe 'Airline show page', type: :model do
     @passenger1.passenger_flights.create!(flight_id: @flight1.id)
     @passenger2.passenger_flights.create!(flight_id: @flight2.id)
     @passenger3.passenger_flights.create!(flight_id: @flight3.id)
+
     @passenger4.passenger_flights.create!(flight_id: @flight1.id)
-    @passenger5.passenger_flights.create!(flight_id: @flight2.id)
-    @passenger6.passenger_flights.create!(flight_id: @flight3.id)
     @passenger4.passenger_flights.create!(flight_id: @flight4.id)
+
     @passenger5.passenger_flights.create!(flight_id: @flight4.id)
+    @passenger5.passenger_flights.create!(flight_id: @flight2.id)
+    @passenger5.passenger_flights.create!(flight_id: @flight3.id)
+
+
+    @passenger6.passenger_flights.create!(flight_id: @flight3.id)
     @passenger6.passenger_flights.create!(flight_id: @flight4.id)
+    @passenger6.passenger_flights.create!(flight_id: @flight2.id)
+    @passenger6.passenger_flights.create!(flight_id: @flight1.id)
 
     @passenger7.passenger_flights.create!(flight_id: @flight5.id)
   end
@@ -50,5 +57,15 @@ RSpec.describe 'Airline show page', type: :model do
 
     expect(page.all('.airlinePassenger').length).to eq(5)
     expect(page.all('.airlinePassenger')[5]).to eq(nil)
+  end
+
+  it 'has the passenger list sorted by most flights taken' do
+    visit "/airlines/#{@united.id}"
+
+    expect(page.all('.airlinePassenger')[0]).to have_content("Casey")
+    expect(page.all('.airlinePassenger')[1]).to have_content("Deannah")
+    expect(page.all('.airlinePassenger')[2]).to have_content("Parker")
+    expect(page.all('.airlinePassenger')[3]).to have_content("Jimbob")
+    expect(page.all('.airlinePassenger')[4]).to have_content("Sally")
   end
 end

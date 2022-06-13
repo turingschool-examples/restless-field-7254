@@ -26,7 +26,7 @@ RSpec.describe 'Flights index page', type: :feature do
 
     within "#flight-#{@flight_1.id}" do
       expect(page).to have_content('Flight Number: 5543')
-      expect(page).to have_content('Flight Airline: Southwest')
+      expect(page).to have_content('Airline: Southwest')
       expect(page).to have_content('Passengers:')
       expect(page).to have_content('Jack')
       expect(page).to have_content('Ryan')

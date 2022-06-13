@@ -4,6 +4,6 @@ class Flight < ApplicationRecord
   has_many :passengers, through: :flight_passengers
 
   def all_passenger_names
-    passengers.pluck(:name)
+    passengers.pluck(:name).join(", ")
   end
 end

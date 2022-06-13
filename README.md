@@ -59,6 +59,10 @@ Field Trip is an app that tracks Airlines, Flights, and Passengers.
 
 Some of the initial migrations and model set up has been done for you.
 
+## Database Diagram
+
+https://user-images.githubusercontent.com/99001315/173264726-41cf78ac-ae7f-4fe2-953c-18dee4749900.png
+
 ## User Stories
 
 ```

@@ -1,0 +1,8 @@
+<h1>Flight #<%= @flight.number %></h1>
+
+<h3>Passenger Manifest:</h3>
+<ol>
+<% @flight.only_adults.each do |passenger| %>
+  <li><%= passenger.name %></li>
+<% end %>
+</ol>

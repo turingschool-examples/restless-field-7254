@@ -31,9 +31,9 @@ RSpec.describe 'airlines#show', type: :feature do
 
   it 'should show passengers over age of 18' do
     within '#passengers' do
-      expect(page).to have_content(@p1.name)
-      expect(page).to have_content(@p2.name)
-      expect(page).to have_content(@p3.name)
+      expect(page).to have_content(@p1.name).once
+      expect(page).to have_content(@p2.name).once
+      expect(page).to have_content(@p3.name).once
       expect(page).to_not have_content(@p4.name)
     end
   end

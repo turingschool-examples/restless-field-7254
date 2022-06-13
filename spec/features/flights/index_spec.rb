@@ -43,7 +43,7 @@ RSpec.describe "Flights Index Page" do
 
   it "can click a button to remove a specific passenger from a flight" do
     visit flights_path
-
+    
     within "#flight-#{flight_1.id}" do
       expect(page).to have_content('Brennan Lee Mulligan')
       click_button "Remove Brennan Lee Mulligan"

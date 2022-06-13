@@ -35,7 +35,7 @@ RSpec.describe "Airline's Show Page" do
 
   it "displays a unique list of adult passengers sorted by the number of flights each passenger has taken on the airline from most to least" do
     visit airline_path(airline_1)
-
+    
     expect('Misty Moore').to appear_before('Bill Seacaster')
     expect('Bill Seacaster').to appear_before('Kingston Brown')
     expect(page).to_not have_content('Brennan Lee Mulligan')

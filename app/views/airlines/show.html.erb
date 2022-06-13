@@ -1,7 +1,5 @@
 <h1><%= @airline.name %>'s Show Page</h1>
 
-<ol>
-  <% @airline.frequent_flyers.each do |passenger| %>
-    <%= passenger.name %>
-  <% end %>
-</ol>
+<% @airline.frequent_flyers.each do |passenger| %>
+  <%= passenger.name %><br>
+<% end %>

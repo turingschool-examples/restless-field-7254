@@ -27,7 +27,7 @@ RSpec.describe "flight index" do
   it "lists all flights, their airline, and all passengers on the flight" do
     visit "/flights"
 
-    within("#flight-#{@flight1.id}") do
+    within(".flight-#{@flight1.id}") do
       expect(page).to have_content(@flight1.number)
       expect(page).to have_content(@airline1.name)
       expect(page).to have_content(@passenger1.name)

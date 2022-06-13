@@ -18,16 +18,16 @@ RSpec.describe 'Flights index page', type: :model do
     @passenger5 = Passenger.create!(name: "Deannah", age: 29)
     @passenger6 = Passenger.create!(name: "Casey", age: 25)
 
-    @passenger1.passenger_flights.create!(flight_id: @flight1)
-    @passenger2.passenger_flights.create!(flight_id: @flight2)
-    @passenger3.passenger_flights.create!(flight_id: @flight3)
-    @passenger4.passenger_flights.create!(flight_id: @flight1)
-    @passenger5.passenger_flights.create!(flight_id: @flight2)
-    @passenger6.passenger_flights.create!(flight_id: @flight3)
+    @passenger1.passenger_flights.create!(flight_id: @flight1.id)
+    @passenger2.passenger_flights.create!(flight_id: @flight2.id)
+    @passenger3.passenger_flights.create!(flight_id: @flight3.id)
+    @passenger4.passenger_flights.create!(flight_id: @flight1.id)
+    @passenger5.passenger_flights.create!(flight_id: @flight2.id)
+    @passenger6.passenger_flights.create!(flight_id: @flight3.id)
 
-    @passenger4.passenger_flights.create!(flight_id: @flight4)
-    @passenger5.passenger_flights.create!(flight_id: @flight4)
-    @passenger6.passenger_flights.create!(flight_id: @flight4)
+    @passenger4.passenger_flights.create!(flight_id: @flight4.id)
+    @passenger5.passenger_flights.create!(flight_id: @flight4.id)
+    @passenger6.passenger_flights.create!(flight_id: @flight4.id)
   end
 
   it 'has a list of all flight numbers' do
@@ -49,7 +49,7 @@ RSpec.describe 'Flights index page', type: :model do
   it 'has passenger names listed under the flight number' do
     visit "/flights"
 
-    within "#flight#{@flight4}Details" do
+    within "#flightDetails#{@flight4.id}" do
       expect(page).to have_content("Parker")
       expect(page).to have_content("Deannah")
       expect(page).to have_content("Casey")

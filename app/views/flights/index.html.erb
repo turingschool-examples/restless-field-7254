@@ -5,7 +5,7 @@
     <p><strong>Flight Number:</strong> <%= flight.number %> <strong>Airline:</strong> <%= flight.airline.name %></p>
     <p><strong>Passenger Manifest:</strong></p>
     <% flight.passengers.each do |passenger| %>
-    <p><%= passenger.name %></p>
+    <p><%= passenger.name %> <%= link_to "Remove Passenger ##{passenger.id}", "/flights/#{flight.id}/passengers/#{passenger.id}", method: :delete %></p>
     <% end %>
   </div>
   <br>

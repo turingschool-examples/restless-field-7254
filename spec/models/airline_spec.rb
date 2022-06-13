@@ -14,6 +14,8 @@ RSpec.describe Airline, type: :model do
                                                           arrival_city:'Dallas', airline_id:@airline_1.id)
     @flight_3 = Flight.create!(number:'5545', date:'1/16/22', departure_city: 'Waco',
                                                           arrival_city:'Denver', airline_id:@airline_1.id)
+    @flight_4 = Flight.create!(number:'5545', date:'1/17/22', departure_city: 'Cancun',
+                                                          arrival_city:'Ibiza', airline_id:@airline_1.id)
     @passenger_1 = Passenger.create!(name:'Jack', age:15)
     @passenger_2 = Passenger.create!(name:'Ryan', age:35)
     @passenger_3 = Passenger.create!(name:'Stacy', age:23)
@@ -22,15 +24,28 @@ RSpec.describe Airline, type: :model do
     @passenger_6 = Passenger.create!(name:'Macy', age:55)
 
     @passenger_flight_1 = PassengerFlight.create!(passenger_id:@passenger_1.id, flight_id:@flight_1.id)
-    @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_1.id)
-    @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_1.id)
-    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_1.id)
-    @passenger_flight_5 = PassengerFlight.create!(passenger_id:@passenger_1.id, flight_id:@flight_2.id)
-    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_2.id)
-    @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_5.id, flight_id:@flight_1.id)
-    @passenger_flight_8 = PassengerFlight.create!(passenger_id:@passenger_6.id, flight_id:@flight_1.id)
+    @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_1.id, flight_id:@flight_2.id)
+
+    @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_2.id)
+    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_1.id)
+    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_3.id)
+
+    @passenger_flight_5 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_1.id)
+    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_2.id)
+    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_3.id)
+    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_3.id)
+
+    @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_1.id)
+    @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_2.id)
+
+    @passenger_flight_8 = PassengerFlight.create!(passenger_id:@passenger_5.id, flight_id:@flight_1.id)
+
+    @passenger_flight_9 = PassengerFlight.create!(passenger_id:@passenger_6.id, flight_id:@flight_1.id)
 
     expect(@airline_1.distinct_adult_passengers).to eq([@passenger_6.name, @passenger_4.name,
                                                         @passenger_2.name, @passenger_3.name])
+
+    expect(@airline_1.adult_passengers_by_flights).to eq([@passenger_3, @passenger_2,
+                                                           @passenger_4, @passenger_6])
   end
 end

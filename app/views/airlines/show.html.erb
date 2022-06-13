@@ -2,7 +2,7 @@
 
   <div id='passengers'>
     Passengers:<br>
-    <% @airline.distinct_adult_passengers.each do |p| %>
-      <%= p %>
+    <% @airline.adult_passengers_by_flights.each do |p| %>
+      <%= p.name %> Flights: <%= p.flights.count %><br>
     <% end %>
   </div>

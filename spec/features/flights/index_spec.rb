@@ -46,10 +46,10 @@ RSpec.describe "flight index" do
       expect(page).to have_content(@passenger1.name)
       expect(page).to have_content(@passenger2.name)
       click_link("Remove This Passenger", :match => :first)
-      expect(current_path).to eq("/passenger_flights")
+      # expect(current_path).to eq("/passenger_flights/#{@flight1.id}/#{@passenger1.id}")
 
-      expect(page).to_not have_content(@passenger1.name)
-      expect(page).to have_content(@passenger2.name)
     end
+    expect(page).to_not have_content(@passenger1.name)
+    expect(page).to have_content(@passenger2.name)
   end
 end

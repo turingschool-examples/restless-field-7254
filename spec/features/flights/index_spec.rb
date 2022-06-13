@@ -48,11 +48,10 @@ RSpec.describe "flights index page" do
     passenger8 = flight4.passengers.create!(name: "Rapunzel", age: 23)
 
     visit "/flights"
-    save_and_open_page
-    within("##{flight1.id}") do
+    within("##{passenger2.id}") do
       expect(page).to have_content("Micheal Stevens")
       expect(page).to have_button("Remove Passenger")
-      click_link "Remove Passenger"
+      click_button "Remove Passenger"
     end
     expect(current_path).to eq("/flights")
     expect(page).to_not have_content("Micheal Stevens")

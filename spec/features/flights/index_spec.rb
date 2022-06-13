@@ -1,4 +1,5 @@
 require 'rails_helper'
+# save_and_open_page
 
 RSpec.describe 'Flights index page', type: :model do
 
@@ -23,5 +24,7 @@ RSpec.describe 'Flights index page', type: :model do
     visit "/flights"
     expect(page).to have_content(@spirit.name)
     expect(page).to have_content(@united.name)
+    expect(page).to have_content("693- Spirit of Freedom")
+    expect(page).to have_content("879- Wind United")
   end
 end

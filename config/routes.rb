@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :flights, only: %i[index]
 
-  resources :flights do
+  resources :flights, only: [] do
     resources :passengers, only: %i[destroy], controller: 'flight_passengers'
   end
+
+  resources :airlines, only: %i[show]
 end

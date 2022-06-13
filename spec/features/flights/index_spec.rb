@@ -89,7 +89,7 @@ RSpec.describe "Flights Index View", type: :feature do
       end
 
       within "#flight-#{flight5.id}" do
-        expect(page).to have_content(flight1.number)
+        expect(page).to have_content(flight5.number)
         expect(page).to have_content(united.name)
         expect(page).to have_content(passenger5.name)
         expect(page).to have_content(passenger1.name)

@@ -27,11 +27,22 @@ RSpec.describe Flights: :Index do
     expect(page).to have_content(@flight3.number)
     expect(page).to have_content(@flight1.airline.name)
 
-    within '#passengers', match: :first do
+    within "#passengers", match: :first do
       expect(page).to have_content(@passenger1.name)
       expect(page).to have_content(@passenger2.name)
       expect(page).to_not have_content(@passenger3.name)
       expect(page).to_not have_content(@passenger4.name)
+    end
+  end
+
+  it 'shows a button to remove a passenger from a flight' do
+    visit flights_path
+
+    within '#passengers', match: :first do
+      click_link('Remove this passenger', match: :first)
+
+      expect(current_path).to eq(flights_path)
+      expect(page).to_not have_content(@passenger1.name)
     end
   end
 end

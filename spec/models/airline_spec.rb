@@ -38,6 +38,7 @@ RSpec.describe Airline, type: :model do
       expect(spirit.age_limiter).to eq([passenger7])
       expect(southwest.age_limiter).to_not eq([passenger, passenger2, passenger, passenger6, passenger5, passenger3, passenger4, passenger5, passenger5, passenger6])
       expect(southwest.age_limiter).to_not include(passenger7)
+      #this is where I would update the method so that not more than one query happens
     end
   end
 end

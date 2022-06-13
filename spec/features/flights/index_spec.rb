@@ -25,4 +25,15 @@ RSpec.describe "Flights index page" do
     expect(page).to have_content("3940")
     expect(page).to have_content("9091")
   end
+
+  it "shows the name of the airline associated with flight" do
+    visit "/flights"
+
+    expect(page).to have_content("American")
+    expect(page).to have_content("Delta")
+    expect(page).to have_content("JetBlue")
+
+    expect(page).to_not have_content("Southwest")
+    expect(page).to_not have_content("United")
+  end
 end

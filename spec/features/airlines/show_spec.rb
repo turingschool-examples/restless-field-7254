@@ -1,11 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
-  it {should have_many(:passengers).through(:flights)}
+RSpec.describe Airline, type: :feature do
+  describe 'the index page' do
 
-  describe 'methods' do
-    it 'gives me the unique adult passengers' do
+    it 'tests user story 3' do
+      # As a visitor
+      # When I visit an airline's show page
+      # Then I see a list of passengers that have flights on that airline
+      # And I see that this list is unique (no duplicate passengers)
+      # And I see that this list only includes adult passengers
+      #
+      # (Note: an adult is anyone with age greater than or equal to 18)
+
+
       airline_1 = Airline.create!(name: "Amercian")
       flight_1 = airline_1.flights.create!(number: 7990, date: 2/7/2022, departure_city: "Glendale", arrival_city: "Dallas")
       flight_2 = airline_1.flights.create!(number: 3940, date: 3/10/2022, departure_city: "Detroit", arrival_city: "Orlando")
@@ -25,11 +32,20 @@ RSpec.describe Airline, type: :model do
       PassengerFlight.create!(passenger_id: passenger_4.id, flight_id: flight_1.id)
       PassengerFlight.create!(passenger_id: passenger_5.id, flight_id: flight_4.id)
 
-      expect(airline_1.adult_passengers).to eq([passenger_1, passenger_2, passenger_5])
+
+      visit "/airlines/#{airline_1.id}"
+      # save_and_open_page
+
+      expect(page).to have_content(passenger_1.name, count:1)
+      expect(page).to have_content(passenger_2.name, count:1)
+      expect(page).to have_content(passenger_5.name, count:1)
+      expect(page).to_not have_content(passenger_3.name, count:1)
+      expect(page).to_not have_content(passenger_4.name, count:1)
+
 
     end
 
-    it 'sorts the passengers in order by number of flights taken' do
+    it 'tests the extension' do
       airline_1 = Airline.create!(name: "Amercian")
       flight_1 = airline_1.flights.create!(number: 7990, date: 2/7/2022, departure_city: "Glendale", arrival_city: "Dallas")
       flight_2 = airline_1.flights.create!(number: 3940, date: 3/10/2022, departure_city: "Detroit", arrival_city: "Orlando")
@@ -52,9 +68,14 @@ RSpec.describe Airline, type: :model do
       PassengerFlight.create!(passenger_id: passenger_5.id, flight_id: flight_3.id)
       PassengerFlight.create!(passenger_id: passenger_5.id, flight_id: flight_4.id)
 
-      expect(airline_1.adult_passengers).to eq([passenger_5, passenger_1, passenger_2])
 
+      visit "/airlines/#{airline_1.id}"
+
+      expect(passenger_5.name).to appear_before(passenger_1.name)
+      expect(passenger_1.name).to appear_before(passenger_2.name)
+      # save_and_open_page
 
     end
+
   end
 end

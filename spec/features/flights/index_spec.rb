@@ -149,7 +149,6 @@ RSpec.describe "Flights Index View", type: :feature do
     # (Note: you should not destroy the passenger record entirely)
     it "can remove a passenger from a specific flight" do
       visit "/flights"
-      # save_and_open_page
 
       expect(page).to have_content("Remove Passenger", count: 20)
 

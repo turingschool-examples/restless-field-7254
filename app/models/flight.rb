@@ -15,4 +15,8 @@ class Flight < ApplicationRecord
     passengers.where(status: true)
     .where('age >= 18')
   end
+
+  def flyable_adult_names
+    flyable_adults.pluck(:name)
+  end
 end

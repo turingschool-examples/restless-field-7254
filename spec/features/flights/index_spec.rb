@@ -18,6 +18,7 @@ describe 'flights index page' do
     FlightPassenger.create!(flight: @flight1, passenger: @pass2)
     FlightPassenger.create!(flight: @flight1, passenger: @pass3)
     FlightPassenger.create!(flight: @flight2, passenger: @pass4)
+    FlightPassenger.create!(flight: @flight2, passenger: @pass1)
 
     visit flights_path
   end
@@ -27,7 +28,7 @@ describe 'flights index page' do
       expect(page).to have_content("Flight Number: 1")
       expect(page).to_not have_content("Flight Number: 2")
 
-      expect(page).to have_content("Airline: Jetblue")
+      expect(page).to have_content("Airline: JetBlue")
       expect(page).to_not have_content("Airline: Hawaiian")
 
       expect(page).to have_content("Jenn")
@@ -44,9 +45,31 @@ describe 'flights index page' do
       expect(page).to_not have_content("Airline: Jetblue")
 
       expect(page).to have_content("Rory")
-      expect(page).to_not have_content("Jenn")
+      expect(page).to have_content("Jenn")
       expect(page).to_not have_content("Eric")
       expect(page).to_not have_content("Liz")
+    end
+  end
+
+  it "has a link to remove each passenger from the flight" do
+
+    within "#flight-#{@flight1.id}" do
+      within "#passenger-#{@pass1.id}" do
+
+        expect(page).to have_content("Jenn")
+
+        click_link("Remove Passenger")
+
+        expect(current_path).to eq(flights_path)
+      end
+
+      expect(page).to_not have_content("Jenn")
+
+    end
+
+
+    within "#flight-#{@flight2.id}" do
+      expect(page).to have_content("Jenn")
     end
   end
 end

@@ -27,7 +27,7 @@ RSpec.describe 'Flight Index Page', type: :feature do
 
       visit flights_path
       expect(page).to have_content("All Flights")
-      save_and_open_page
+
       within "#flight-#{flight.id}" do 
         expect(page).to have_content(flight.number)
         expect(page).to have_content(frontier.name)

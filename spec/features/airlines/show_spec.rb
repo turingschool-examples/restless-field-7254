@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Flights Index Page" do
+RSpec.describe "Airline's Show Page" do
   let!(:airline_1) { Airline.create!(name: "Delta") }
 
   let!(:flight_1) { airline_1.flights.create!(number: "7990", date: "08/03/20", departure_city: "Denver", arrival_city: "Chicago") }
@@ -25,38 +25,13 @@ RSpec.describe "Flights Index Page" do
   let!(:pass_flight_9) { PassengerFlight.create!(passenger: passenger_4, flight: flight_3) }
   let!(:pass_flight_10) { PassengerFlight.create!(passenger: passenger_4, flight: flight_4) }
 
-  it "lists all flight numbers, the name of their airline, and the names of all passengers on that flight" do
-    visit flights_path
+  it "lists unique names of adult passengers that have flights on that airline" do
+    visit airline_path(airline_1)
 
-    within "#flight-#{flight_1.id}" do
-      expect(page).to have_content('Flight 7990')
-      expect(page).to have_content('Delta')
-      expect(page).to have_content('Brennan Lee Mulligan')
-      expect(page).to have_content('Abria Iyengar')
-    end
-
-    within "#flight-#{flight_2.id}" do
-      expect(page).to have_content('Flight 3940')
-      expect(page).to have_content('Delta')
-      expect(page).to have_content('Brennan Lee Mulligan')
-      expect(page).to have_content('Abria Iyengar')
-      expect(page).to have_content('Bill Seacaster')
-    end
-  end
-
-  it "can click a button to remove a specific passenger from a flight" do
-    visit flights_path
-
-    within "#flight-#{flight_1.id}" do
-      expect(page).to have_content('Brennan Lee Mulligan')
-      click_button "Remove Brennan Lee Mulligan"
-      expect(page).to_not have_content('Brennan Lee Mulligan')
-    end
-
-    within "#flight-#{flight_2.id}" do
-      expect(page).to have_content('Abria Iyengar')
-      click_button "Remove Abria Iyengar"
-      expect(page).to_not have_content('Abria Iyengar')
-    end
+    expect(page).to have_content('Bill Seacaster')
+    expect(page).to have_content('Misty Moore')
+    expect(page).to have_content('Kingston Brown')
+    expect(page).to_not have_content('Brennan Lee Mulligan')
+    expect(page).to_not have_content('Abria Iyengar')
   end
 end

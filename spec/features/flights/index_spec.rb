@@ -23,12 +23,12 @@ RSpec.describe "flights index page" do
 
   it "displays each flight number, airline for flight, and passengers for flight" do
     visit "/flights"
-
+save_and_open_page
     within "#flight-0" do
       expect(page).to have_content("Flight number: 7990")
-      expect(page).to have_content("Ariline: American")
+      expect(page).to have_content("Airline: American")
       expect(page).to have_content("Passengers: ")
-      expect(page).to have_content("Jane powell")
+      expect(page).to have_content("Jane Powell")
       expect(page).to have_content("John Smith")
 
       expect(page).to_not have_content("Flight number: 3940")
@@ -39,20 +39,20 @@ RSpec.describe "flights index page" do
     end
     within "#flight-1" do
       expect(page).to have_content("Flight number: 3940")
-      expect(page).to have_content("Ariline: American")
+      expect(page).to have_content("Airline: American")
       expect(page).to have_content("Passengers: ")
       expect(page).to have_content("Kathryn Grayson")
       
       expect(page).to_not have_content("Flight number: 9091")
       expect(page).to_not have_content("Flight number: 7990")
       expect(page).to_not have_content("Airline: Delta")
-      expect(page).to_not have_content("Jane powell")
+      expect(page).to_not have_content("Jane Powell")
       expect(page).to_not have_content("John Smith")
       expect(page).to_not have_content("Kate Smith")
     end
     within "#flight-2" do
       expect(page).to have_content("Flight number: 9091")
-      expect(page).to have_content("Ariline: Delta")
+      expect(page).to have_content("Airline: Delta")
       expect(page).to have_content("Passengers: ")
       expect(page).to have_content("Kate Smith")
 

@@ -6,7 +6,7 @@
 <ul>
   Passengers:
   <% flight.passenger_flights.each do |pass| %>
-  <li><%= pass.passenger.name %></li>
+  <li id="passenger-<%= pass.passenger_id %>"><%= pass.passenger.name %><%= link_to "Remove Passenger", "/passenger_flights/#{pass.id}", method: :delete %></li>
   <% end %>
 </ul>
 </div>

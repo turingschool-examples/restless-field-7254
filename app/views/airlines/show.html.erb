@@ -3,8 +3,9 @@
 <div id="passengers">
   <% @airline.adult_passengers.each do |adult| %>
     <p>
-      <%= adult.name %>
-      <%= adult.age %>
+      <strong><%= adult.name %></strong>
+      Flights:
+      <%= adult.count %>
     </p>
   <%end %>
 

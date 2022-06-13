@@ -18,13 +18,23 @@ RSpec.describe 'Ariline Show Page', type: :feature do
     @passenger_6 = Passenger.create!(name:'Macy', age:55)
 
     @passenger_flight_1 = PassengerFlight.create!(passenger_id:@passenger_1.id, flight_id:@flight_1.id)
-    @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_1.id)
-    @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_1.id)
-    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_1.id)
-    @passenger_flight_5 = PassengerFlight.create!(passenger_id:@passenger_1.id, flight_id:@flight_2.id)
-    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_2.id)
-    @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_5.id, flight_id:@flight_1.id)
-    @passenger_flight_8 = PassengerFlight.create!(passenger_id:@passenger_6.id, flight_id:@flight_1.id)
+    @passenger_flight_2 = PassengerFlight.create!(passenger_id:@passenger_1.id, flight_id:@flight_2.id)
+
+    @passenger_flight_3 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_2.id)
+    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_1.id)
+    @passenger_flight_4 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_3.id)
+
+    @passenger_flight_5 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_1.id)
+    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_2.id)
+    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_3.id)
+    @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_3.id, flight_id:@flight_3.id)
+
+    @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_1.id)
+    @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_4.id, flight_id:@flight_2.id)
+
+    @passenger_flight_8 = PassengerFlight.create!(passenger_id:@passenger_5.id, flight_id:@flight_1.id)
+
+    @passenger_flight_9 = PassengerFlight.create!(passenger_id:@passenger_6.id, flight_id:@flight_1.id)
   end
 
   it 'lists all the distinct adult(over 18) passengers on this arilines flights' do
@@ -36,6 +46,24 @@ RSpec.describe 'Ariline Show Page', type: :feature do
       expect(page).to have_content('Stacy')
       expect(page).to have_content('Maddie')
       expect(page).to have_content('Macy')
+
+      # shouldnt be on page
+      expect(page).to_not have_content('Adam')
+      expect(page).to_not have_content('Jack')
+    end
+  end
+
+  # should I have created another test for the order by flight count? I did anyways...
+
+  it 'lists all the distinct adults, and their count of flights' do
+    visit airline_path(@airline_1)
+
+    within '#passengers' do
+      expect(page).to have_content('Passengers:')
+      expect(page).to have_content('Stacy Flights: 4')
+      expect(page).to have_content('Ryan Flights: 3')
+      expect(page).to have_content('Maddie Flights: 2')
+      expect(page).to have_content('Macy Flights: 1')
 
       # shouldnt be on page
       expect(page).to_not have_content('Adam')

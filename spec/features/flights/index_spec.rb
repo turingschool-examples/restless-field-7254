@@ -39,7 +39,7 @@ RSpec.describe Flight, type: :feature do
 
         expect(current_path).to eq("/flights")
         expect(page).to_not have_content(@steve.name)
-      
+   
     end
   end
 end

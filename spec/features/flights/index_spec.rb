@@ -31,18 +31,24 @@ RSpec.describe 'Flights Index Page', type: :feature do
 
       visit flights_path
 
-      within ".all_flights" do
-        expect(page).to have_content("Flight: 177")
-        expect(page).to have_content("Flight: 208")
-        expect(page).to have_content("Big Sky")
+      expect(page).to have_content("Flight: 177")
+      expect(page).to have_content("Flight: 208")
+      expect(page).to have_content("Big Sky")
 
-        expect(page).to have_content("Flight: 444")
-        expect(page).to have_content("Flight: 101")
-        expect(page).to have_content("Denta")
-      end
+      expect(page).to have_content("Flight: 444")
+      expect(page).to have_content("Flight: 101")
+      expect(page).to have_content("Denta")
+
 
       within "#flight-#{fly1.id}" do
-        expect(page).to have_content("Passengers: Sally, Sam")
+        expect(page).to have_content("Passengers:")
+
+        within "#passenger-#{sally.id}" do
+          expect(page).to have_content("Sally")
+        end
+        within "#passenger-#{sam.id}" do
+          expect(page).to have_content("Sam")
+        end
       end
     end
   end

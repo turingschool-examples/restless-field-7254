@@ -33,14 +33,15 @@ RSpec.describe 'Airline show page', type: :model do
     @passenger7.passenger_flights.create!(flight_id: @flight5.id)
   end
 
-  it 'shows a list of passengers on any flight by this airline' do
+  it 'shows a unique list of adult passengers on any flight by this airline' do
     visit "/airlines/#{@united.id}"
 
     expect(page).to have_content("Jimbob")
     expect(page).to have_content("Sally")
-    expect(page).to have_content("Pepsi")
+    expect(page).to_not have_content("Pepsi")
     expect(page).to have_content("Casey")
     expect(page).to have_content("Parker")
     expect(page).to have_content("Deannah")
+    expect(page).to_not have_content("Helen")
   end
 end

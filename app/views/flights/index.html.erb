@@ -1,0 +1,12 @@
+<h3>All Flights</h3>
+
+<% @flights.each do |flight| %>
+<div id="flight-<%=flight.id%>">
+  <p><%= flight.number %></p>
+  <p><%= flight.airline.name %></p>
+  <% flight.flight_passengers.each do |flight_passenger| %>
+    <%= flight_passenger.passenger.name %>
+    <%= link_to "Remove #{flight_passenger.passenger.name}", flight_passenger_path(flight.id, flight_passenger.passenger.id), method: :delete %>
+  <% end %>
+</div>
+<% end %>

@@ -70,7 +70,7 @@ RSpec.describe 'airline show page' do
                                       arrival_city: 'Watsontown')
     flight3 = airline1.flights.create(number: '248', date: 'June 4, 2022', departure_city: 'Williamsport',
                                       arrival_city: 'Turbotville')
-    flight4 = airline2.flights.create(number: '098', date: 'June 3, 2022', departure_city: 'McEwensville',
+    flight4 = airline1.flights.create(number: '098', date: 'June 3, 2022', departure_city: 'McEwensville',
                                       arrival_city: 'Harrisburg')
     flight5 = airline2.flights.create(number: '209', date: 'June 2, 2022', departure_city: 'San Diego',
                                       arrival_city: 'Kansnas City')
@@ -95,7 +95,10 @@ RSpec.describe 'airline show page' do
     PassengerFlight.create(passenger_id: pass1.id, flight_id: flight2.id)
     PassengerFlight.create(passenger_id: pass2.id, flight_id: flight1.id)
     PassengerFlight.create(passenger_id: pass2.id, flight_id: flight2.id)
+    PassengerFlight.create(passenger_id: pass2.id, flight_id: flight3.id)
+    PassengerFlight.create(passenger_id: pass2.id, flight_id: flight4.id)
     PassengerFlight.create(passenger_id: pass3.id, flight_id: flight2.id)
+    PassengerFlight.create(passenger_id: pass3.id, flight_id: flight1.id)
     PassengerFlight.create(passenger_id: pass4.id, flight_id: flight3.id)
     PassengerFlight.create(passenger_id: pass5.id, flight_id: flight4.id)
     PassengerFlight.create(passenger_id: pass6.id, flight_id: flight4.id)
@@ -108,8 +111,8 @@ RSpec.describe 'airline show page' do
 
     visit airline_path(airline1.id)
 
-    expect('John Wisbrook').to appear_before('Kate Wisbrook')
-    expect('Kate Wisbrook').to appear_before('Kate Wisbrook')
+    expect('Kate Wisbrook').to appear_before('John Wisbrook')
     expect('John Wisbrook').to appear_before('Alex Spoop')
+    expect('Alex Spoop').to appear_before('Caren Longsby')
   end
 end

@@ -24,6 +24,7 @@ RSpec.describe "flight index page" do
 
   it "can delete a passenger from a flight" do
     expect(page).to have_content("Passengers: Nick")
+    expect(page).to have_content("Passengers: Sarah")
     expect(page).to have_button("Remove Passenger", count: 2)
 
     click_button("Remove Passenger", match: :first)
@@ -31,6 +32,8 @@ RSpec.describe "flight index page" do
 
     expect(page).to have_button("Remove Passenger", count: 1)
 
+    expect(page).to have_content("Passengers: Sarah")
+    
     expect(page).to_not have_content("Passengers: Nick")
   end
 

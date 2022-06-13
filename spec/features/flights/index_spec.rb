@@ -39,5 +39,35 @@ RSpec.describe 'flights index page' do
     PassengerFlight.create(passenger_id: pass8.id, flight_id: flight5.id)
     PassengerFlight.create(passenger_id: pass9.id, flight_id: flight5.id)
     PassengerFlight.create(passenger_id: pass10.id, flight_id: flight6.id)
+
+    visit '/flights'
+
+    within "#flight#{flight1.id}" do
+      expect(page).to have_content('423')
+      expect(page).to have_content('Flight Matters')
+      expect(page).to have_content('John Wisbrook')
+      expect(page).to have_content('Kate Wisbrook')
+      expect(page).to_not have_content('Vulkan')
+      expect(page).to_not have_content('938')
+      expect(page).to_not have_content('Spur Salmon')
+    end
+
+    within "#flight#{flight3.id}" do
+      expect(page).to have_content('248')
+      expect(page).to have_content('Flight Matters')
+      expect(page).to have_content('Caren Longsby')
+      expect(page).to_not have_content('Vulkan')
+      expect(page).to_not have_content('938')
+      expect(page).to_not have_content('Spur Salmon')
+    end
+
+    within "#flight#{flight6.id}" do
+      expect(page).to have_content('029')
+      expect(page).to have_content('Vulkan')
+      expect(page).to have_content('Loop Lensfield')
+      expect(page).to_not have_content('Flight Matters')
+      expect(page).to_not have_content('938')
+      expect(page).to_not have_content('Spur Salmon')
+    end
   end
 end

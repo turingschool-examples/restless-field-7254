@@ -23,7 +23,7 @@ RSpec.describe 'Flights Index' do
 
   it 'displays all flight numbers, airline name' do
     visit "/flights"
-    
+
     expect(page).to have_content("All Flights Info")
     expect(page).to_not have_content("Elena")
     expect(page).to_not have_content("Lydia")
@@ -65,11 +65,13 @@ end
     visit "/flights"
 
     within "#id-#{@flight_2.id}" do
+      expect(page).to have_content("Horatio")
       expect(page).to have_content("Deana")
       click_link "Remove #{@deana.name}"
 
       expect(current_path).to eq("/flights")
       expect(page).to_not have_content("Deana")
+      expect(page).to have_content("Horatio")
     end
   end
 end

@@ -20,8 +20,8 @@ RSpec.describe Airline, type: :model do
     end
 
     it '#adult_passengers' do
-      result = [@p1]
-      expect(@a1.adult_passengers).to eq(result)
+      expect(@a1.adult_passengers.length).to eq(1)
+      expect(@a1.adult_passengers.first.name).to eq('Bryce')
     end
   end
 end

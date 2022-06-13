@@ -25,16 +25,23 @@ RSpec.describe 'airlines#show', type: :feature do
     @fp5 = FlightPassenger.create!(flight_id: @f2.id, passenger_id: @p2.id)
 
     @fp6 = FlightPassenger.create!(flight_id: @f3.id, passenger_id: @p1.id)
+
+    visit airline_path(@a1)
   end
 
   it 'should show passengers over age of 18' do
-    visit airline_path(@a1)
-
     within '#passengers' do
       expect(page).to have_content(@p1.name)
       expect(page).to have_content(@p2.name)
       expect(page).to have_content(@p3.name)
       expect(page).to_not have_content(@p4.name)
+    end
+  end
+
+  it 'should show the passengers in order of flying frequency ' do
+    within '#passengers' do
+      expect(@p1.name).to appear_before(@p2.name)
+      expect(@p2.name).to appear_before(@p3.name)
     end
   end
 end

@@ -19,7 +19,7 @@ RSpec.describe Passenger do
       pf1 = PassengerFlight.create(passenger_id: pass1.id, flight_id: flight1.id)
       pf2 = PassengerFlight.create(passenger_id: pass2.id, flight_id: flight1.id)
 
-      expect(pass1.flight_association).to eq(pf1.id)
+      expect(pass1.flight_association(flight1.id)).to eq(pf1.id)
     end
   end
 end

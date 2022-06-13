@@ -5,7 +5,7 @@ RSpec.describe Flight, type: :model do
   it { should have_many :flight_passengers }
   it { should have_many(:passengers).through(:flight_passengers) }
 
-  it "describes class methods" do
+  describe "class methods" do
     before :each do
       @spirit = Airline.create!(name: "Spirit")
       @flight1 = @spirit.flights.create!(number: 123, date: "07/18/22",

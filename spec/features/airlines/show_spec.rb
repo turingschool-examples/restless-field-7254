@@ -124,8 +124,9 @@ RSpec.describe "Airline Show View", type: :feature do
     # (Note: you should only make 1 database query to retrieve the sorted list of passengers)
     it "sorts the passengers by most to least flights with this airline" do
       visit "/airlines/#{american.id}"
-      save_and_open_page
-
+      # Misty has 3 flights
+      # Bill has 2
+      # Uncle C. only has 1
       expect("Misty Moore").to appear_before("Bill Seacaster")
       expect("Bill Seacaster").to appear_before("Uncle Carbuncle")
     end

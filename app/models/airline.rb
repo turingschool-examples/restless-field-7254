@@ -6,6 +6,7 @@ class Airline < ApplicationRecord
   def adult_passengers
     passengers
     .where("age >= ?", 18)
-    .uniq
+    .group("passengers.id")
+    .order(Arel.sql("COUNT(passengers.id) DESC"))
   end
 end

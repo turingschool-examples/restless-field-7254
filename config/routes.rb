@@ -4,4 +4,6 @@ Rails.application.routes.draw do
     resources :passengers, only: [:destroy], controller: :flight_passengers
   end
 
+  resources :airlines, only: [:show]
+
 end

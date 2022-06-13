@@ -6,6 +6,11 @@
     <%= flight.airline.name %>
     <% flight.passengers.each do |passenger| %>
       <%= passenger.name %>
+      <%= form_with url: "/flights/#{flight.id}", method: :delete, local: true do |f| %>
+        <%= f.hidden_field :flight_id, value: "#{flight.id}" %>
+        <%= f.hidden_field :passenger_id, value: "#{passenger.id}" %>
+        <%= f.submit "Remove #{passenger.name} From Flight" %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

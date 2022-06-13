@@ -7,8 +7,7 @@ describe 'flights index page' do
 
     @flight1 = @airline1.flights.create!(number: 1, date: "5/19/22", arrival_city: "NYC", departure_city: "San Fran")
     @flight2 = @airline2.flights.create!(number: 2, date: "5/23/22", arrival_city: "Honolulu", departure_city: "Denver")
-    # @flight3 = @airline1.flights.create!(number: 2, date: "5/20/22", arrival_city: "Oakland", departure_city: "Las Vegas")
-
+    
     @pass1 = Passenger.create!(name: "Jenn", age: 29)
     @pass2 = Passenger.create!(name: "Eric", age: 31)
     @pass3 = Passenger.create!(name: "Liz", age: 28)
@@ -51,7 +50,7 @@ describe 'flights index page' do
     end
   end
 
-  it "has a link to remove each passenger from the flight" do
+  it "has a link to remove each passenger from the flight, and then I see that the passenger has been removed only from that specific flight" do
 
     within "#flight-#{@flight1.id}" do
       within "#passenger-#{@pass1.id}" do
@@ -64,6 +63,8 @@ describe 'flights index page' do
       end
 
       expect(page).to_not have_content("Jenn")
+      expect(page).to have_content("Liz")
+      expect(page).to have_content("Eric")
 
     end
 

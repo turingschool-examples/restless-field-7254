@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :flights, only: [:index]
+
+  delete "/passenger_flights/:flight_id/:passenger_id", to: "passenger_flights#destroy"
+  # resources :passenger_flights, only: [:destroy]
+
+  resources :airlines, only: [:show]
+
 end

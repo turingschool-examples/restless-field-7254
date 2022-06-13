@@ -1,17 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it { should have_many(:flights) }
-  it { should have_many(:passenger_flights).through(:flights) }
-  it { should have_many(:passengers).through(:passenger_flights) }
+RSpec.describe PassengerFlight, type: :model do
+  describe "associations" do
+    it { should belong_to :flight}
+    it { should belong_to :passenger}
+  end
 
-  describe 'isntance methods' do
+  describe "class methods" do
     before(:each) do
       @airline1 = Airline.create!(name: "American")
       @airline2 = Airline.create!(name: "Delta")
-      # @airline3 = Airline.create!(Name: "JetBlue")
-      # @airline4 = Airline.create!(Name: "SouthWest")
-      # @airline5 = Airline.create!(Name: "United")
 
       @flight1 = @airline1.flights.create!(number: "7990", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas")
       @flight2 = @airline1.flights.create!(number: "3940", date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando")
@@ -35,9 +33,16 @@ RSpec.describe Airline, type: :model do
       @passflight7 = PassengerFlight.create!(passenger_id: @passenger7.id, flight_id: @flight4.id)
     end
 
-    it "gets all the unique adults with a scheduled flight with the airline" do
-      expect(@airline1.uniq_passengers).to eq([@passenger1, @passenger3, @passenger5, @passenger6])
+    it "removes a passenger from the flight without destroying the passenger resource" do
+      expect(@passenger1.present?).to eq true
+      expect(@flight1.present?).to eq true
+      expect(@passflight1.present?).to eq true
+
+      PassengerFlight.remove_passenger(@passenger1.id, @flight1.id)
+      # binding.pry
+      expect(@passenger1.present?).to eq true
+      expect(@flight1.present?).to eq true
+      expect(@passflight1.present?).to eq false
     end
   end
-
 end

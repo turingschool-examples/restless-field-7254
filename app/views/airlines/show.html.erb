@@ -1,0 +1,8 @@
+<h><%= @airline.name %> Show Page</h1>
+
+  <div id='passengers'>
+    Passengers:<br>
+    <% @airline.distinct_adult_passengers.each do |p| %>
+      <%= p %>
+    <% end %>
+  </div>

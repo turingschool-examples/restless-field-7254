@@ -1,11 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
-  it { should have_many(:passengers).through(:flights) }
-
-
-  it 'can create a list of distinct passengers above 18 years old on this airlines flight' do
+RSpec.describe 'Ariline Show Page', type: :feature do
+  before :each do
     @airline_1 = Airline.create!(name:'Southwest')
 
     @flight_1 = Flight.create!(number:'5543', date:'1/14/22', departure_city: 'Atlanta',
@@ -29,8 +25,21 @@ RSpec.describe Airline, type: :model do
     @passenger_flight_6 = PassengerFlight.create!(passenger_id:@passenger_2.id, flight_id:@flight_2.id)
     @passenger_flight_7 = PassengerFlight.create!(passenger_id:@passenger_5.id, flight_id:@flight_1.id)
     @passenger_flight_8 = PassengerFlight.create!(passenger_id:@passenger_6.id, flight_id:@flight_1.id)
+  end
 
-    expect(@airline_1.distinct_adult_passengers).to eq([@passenger_6.name, @passenger_4.name,
-                                                        @passenger_2.name, @passenger_3.name])
+  it 'lists all the distinct adult(over 18) passengers on this arilines flights' do
+    visit airline_path(@airline_1)
+
+    within '#passengers' do
+      expect(page).to have_content('Passengers:')
+      expect(page).to have_content('Ryan')
+      expect(page).to have_content('Stacy')
+      expect(page).to have_content('Maddie')
+      expect(page).to have_content('Macy')
+
+      # shouldnt be on page
+      expect(page).to_not have_content('Adam')
+      expect(page).to_not have_content('Jack')
+    end
   end
 end

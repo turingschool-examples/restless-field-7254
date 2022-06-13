@@ -4,8 +4,13 @@
     <div id=<%= "flights-#{flight.id}" %>
       <p> Flight Number: <%= flight.number %> - Airline: <%= flight.airline.name %> </p>
         <% flight.passengers.each do |passenger| %>
-          <p> Passenger: <%= passenger.name %> </p>
+        <p> Passenger: <%= passenger.name %> - <%= link_to "Remove #{passenger.name}", flight_path(passenger), method: :patch, params: {update_status_to: :removed}%> </p>
       <% end %>
-  </div>
+    </div>
   <% end %>
+</div>
+
+<div class="removed-passengers">
+  <h2>Removed Passengers</h2>
+
 </div>

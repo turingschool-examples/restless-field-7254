@@ -1,11 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
-  it { should have_many(:passengers).through(:flights) }
-
-
-  it 'can create a list of distinct passengers above 18 years old on this airlines flight' do
+RSpec.describe 'Ariline Show Page', type: :feature do
+  before :each do
     @airline_1 = Airline.create!(name:'Southwest')
 
     @flight_1 = Flight.create!(number:'5543', date:'1/14/22', departure_city: 'Atlanta',
@@ -14,8 +10,6 @@ RSpec.describe Airline, type: :model do
                                                           arrival_city:'Dallas', airline_id:@airline_1.id)
     @flight_3 = Flight.create!(number:'5545', date:'1/16/22', departure_city: 'Waco',
                                                           arrival_city:'Denver', airline_id:@airline_1.id)
-    @flight_4 = Flight.create!(number:'5545', date:'1/17/22', departure_city: 'Cancun',
-                                                          arrival_city:'Ibiza', airline_id:@airline_1.id)
     @passenger_1 = Passenger.create!(name:'Jack', age:15)
     @passenger_2 = Passenger.create!(name:'Ryan', age:35)
     @passenger_3 = Passenger.create!(name:'Stacy', age:23)
@@ -41,11 +35,39 @@ RSpec.describe Airline, type: :model do
     @passenger_flight_8 = PassengerFlight.create!(passenger_id:@passenger_5.id, flight_id:@flight_1.id)
 
     @passenger_flight_9 = PassengerFlight.create!(passenger_id:@passenger_6.id, flight_id:@flight_1.id)
+  end
 
-    expect(@airline_1.distinct_adult_passengers).to eq([@passenger_6.name, @passenger_4.name,
-                                                        @passenger_2.name, @passenger_3.name])
+  it 'lists all the distinct adult(over 18) passengers on this arilines flights' do
+    visit airline_path(@airline_1)
 
-    expect(@airline_1.adult_passengers_by_flights).to eq([@passenger_3, @passenger_2,
-                                                           @passenger_4, @passenger_6])
+    within '#passengers' do
+      expect(page).to have_content('Passengers:')
+      expect(page).to have_content('Ryan')
+      expect(page).to have_content('Stacy')
+      expect(page).to have_content('Maddie')
+      expect(page).to have_content('Macy')
+
+      # shouldnt be on page
+      expect(page).to_not have_content('Adam')
+      expect(page).to_not have_content('Jack')
+    end
+  end
+
+  # should I have created another test for the order by flight count? I did anyways...
+
+  it 'lists all the distinct adults, and their count of flights' do
+    visit airline_path(@airline_1)
+
+    within '#passengers' do
+      expect(page).to have_content('Passengers:')
+      expect(page).to have_content('Stacy Flights: 4')
+      expect(page).to have_content('Ryan Flights: 3')
+      expect(page).to have_content('Maddie Flights: 2')
+      expect(page).to have_content('Macy Flights: 1')
+
+      # shouldnt be on page
+      expect(page).to_not have_content('Adam')
+      expect(page).to_not have_content('Jack')
+    end
   end
 end

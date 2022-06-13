@@ -56,7 +56,6 @@ RSpec.describe "Airline Show View", type: :feature do
     # (Note: an adult is anyone with age greater than or equal to 18)
     it "shows a unique list of only adult passengers for that airline" do
       visit "/airlines/#{american.id}"
-      save_and_open_page
 
       expect(page).to have_content("Bill Seacaster", count: 1)
       expect(page).to have_content("Misty Moore", count: 1)

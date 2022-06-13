@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
+RSpec.describe 'airline show page' do 
   let!(:airline_1) { Airline.create!(name: "Fly Away") }
   # let!(:airline_2) { Airline.create!(name: "Fly Home") }
 
@@ -13,15 +13,10 @@ RSpec.describe Airline, type: :model do
   let!(:passenger_3) { Passenger.create!(name: "Tom", age: 15 ) }
   let!(:passenger_4) { Passenger.create!(name: "Don", age: 20 ) }
 
-  # let!(:fp_1) { FlightPassenger.create!(flight_id: flight_1.id, passenger_id: passenger_1.id)}
-  # let!(:fp_2) { FlightPassenger.create!(flight_id: flight_1.id, passenger_id: passenger_2.id)}
-  # let!(:fp_3) { FlightPassenger.create!(flight_id: flight_2.id, passenger_id: passenger_3.id)}
-  # let!(:fp_4) { FlightPassenger.create!(flight_id: flight_2.id, passenger_id: passenger_4.id)}
-  # let!(:fp_5) { FlightPassenger.create!(flight_id: flight_2.id, passenger_id: passenger_1.id)}
-
   let!(:fp_1) { FlightPassenger.create!(flight_id: flight_1.id, passenger_id: passenger_1.id)}
   let!(:fp_2) { FlightPassenger.create!(flight_id: flight_2.id, passenger_id: passenger_1.id)}
   let!(:fp_3) { FlightPassenger.create!(flight_id: flight_3.id, passenger_id: passenger_1.id)}
+
   let!(:fp_4) { FlightPassenger.create!(flight_id: flight_1.id, passenger_id: passenger_2.id)}
   let!(:fp_5) { FlightPassenger.create!(flight_id: flight_2.id, passenger_id: passenger_2.id)}
 
@@ -31,15 +26,17 @@ RSpec.describe Airline, type: :model do
   let!(:fp_8) { FlightPassenger.create!(flight_id: flight_2.id, passenger_id: passenger_4.id)}
 
 
-  it { should have_many(:flights) }
-  it { should have_many(:flight_passengers).through(:flights) } 
-  it { should have_many(:passengers).through(:flight_passengers) } 
 
-  it 'can return list of unique adult passengers' do 
-    expected = ["Hank", "Sam", "Don"]
-    expected = [passenger_1, passenger_2, passenger_4]
+  it 'shows list of unique adult passengers on airline' do 
+    visit airline_path(airline_1.id)
 
-    expect(airline_1.unique_adult_passengers.each do |passenger| passenger.name end ).to eq(expected)
+    expect(page).to have_content(passenger_1.name, count: 1) #only unique passengers
+    expect(page).to have_content(passenger_1.age) #only unique passengers
+    expect(page).to have_content(passenger_2.name)
+    expect(page).to have_content(passenger_2.age)
+    expect(page).to have_content(passenger_4.name) 
+    expect(page).to have_content(passenger_4.age) 
+    expect(page).to_not have_content(passenger_3.name) #no passenger under 18 
   end
 
 end

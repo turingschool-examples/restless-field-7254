@@ -1,0 +1,6 @@
+
+<%= @airline.name %></br>
+<% @airline.unique_adult_passengers.each do |passenger|%>
+  <%= passenger.name %>
+  <%= passenger.age %></br>
+<%end%>

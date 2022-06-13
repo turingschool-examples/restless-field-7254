@@ -27,7 +27,7 @@ RSpec.describe 'Flights Index Page' do
 
   it "lists all flight numbers, the name of their airline, and the names of all passengers on that flight" do
     visit flights_path
-    
+
     within "#flight-#{flight_1.id}" do
       expect(page).to have_content('Flight 7990')
       expect(page).to have_content('Delta')
@@ -41,6 +41,22 @@ RSpec.describe 'Flights Index Page' do
       expect(page).to have_content('Brennan Lee Mulligan')
       expect(page).to have_content('Abria Iyengar')
       expect(page).to have_content('Bill Seacaster')
+    end
+  end
+
+  it "can click a button to remove a specific passenger from a flight" do
+    visit flights_path
+
+    within "#flight-#{flight_1.id}" do
+      expect(page).to have_content('Brennan Lee Mulligan')
+      click_button "Remove Brennan Lee Mulligan"
+      expect(page).to_not have_content('Brennan Lee Mulligan')
+    end
+
+    within "#flight-#{flight_2.id}" do
+      expect(page).to have_content('Abria Iyengar')
+      click_button "Remove Abria Iyengar"
+      expect(page).to_not have_content('Abria Iyengar')
     end
   end
 end

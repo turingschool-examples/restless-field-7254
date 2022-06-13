@@ -41,6 +41,7 @@ RSpec.describe 'flights index page' do
     PassengerFlight.create(passenger_id: pass10.id, flight_id: flight6.id)
 
     visit '/flights'
+
     within "#flight#{flight1.id}" do
       expect(page).to have_content('423')
       expect(page).to have_content('Flight Matters')

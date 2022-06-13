@@ -1,0 +1,10 @@
+<h1>All Flights</h1>
+
+<div class="all_flights">
+  <% @flights.each do |flight| %>
+  <div id="flight-<%= flight.id %>" >
+    <p>Flight: <%= flight.number %>, <%= flight.airline.name %></p>
+    <p>Passengers: <%= flight.passenger_names.join(", ") %></p>
+  </div>
+  <% end %>
+</div>

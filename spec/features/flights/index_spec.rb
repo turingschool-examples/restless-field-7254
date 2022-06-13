@@ -56,4 +56,26 @@ RSpec.describe 'Flights index page', type: :model do
       expect(page).to_not have_content("Pepsi")
     end
   end
+
+  it 'has links to remove passengers from flights' do
+    visit "/flights"
+
+    within "#flightDetails#{@flight2.id}" do
+      expect(page).to have_content("Sally")
+      expect(page).to have_content("Deannah")
+      expect(page).to have_link("Remove Passenger")
+    end
+  end
+
+  it 'remove passenger redirects to flight index, and passnger clicked is no longer shown' do
+    visit "/flights"
+
+    within "#flightDetails#{@flight2.id}" do
+      within "passenger-#{@passenger2.id}" do
+        click_link("Remove Passenger")
+      end
+    end
+    expect(page).to have_current_path("/flights")
+    expect(page).to_not have_content("Sally")
+  end
 end

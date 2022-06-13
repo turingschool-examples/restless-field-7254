@@ -34,6 +34,7 @@ RSpec.describe Airline, type: :feature do
 
 
       visit "/airlines/#{airline_1.id}"
+      save_and_open_page
 
       expect(page).to have_content(passenger_1.name, count:1)
       expect(page).to have_content(passenger_2.name, count:1)

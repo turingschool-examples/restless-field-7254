@@ -2,7 +2,9 @@
 
 <h3>Passenger Manifest:</h3>
 <ol>
-<% @airline.only_adults.each do |passenger| %>
-  <li><%= passenger.name %></li>
+<% @airline.frequent_flyers.each_with_index do |passenger, index| %>
+  <div id="passenger-<%= index %>">
+    <li><%= passenger.name %></li>
+  </div>
 <% end %>
 </ol>

@@ -33,6 +33,4 @@ RSpec.describe 'flight show page', type: :feature do
     expect(page).to have_content(@shane.name)
   end
 
-  it 'sorts passengers by number of flights'
-
 end

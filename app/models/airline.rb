@@ -4,4 +4,8 @@ class Airline < ApplicationRecord
   has_many :passengers, through: :passenger_flights
 
   validates_presence_of :name
+
+  def adult_passengers
+    require "pry"; binding.pry
+  end
 end

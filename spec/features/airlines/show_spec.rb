@@ -25,7 +25,7 @@ RSpec.describe "Airline's Show Page" do
   let!(:pass_flight_9) { PassengerFlight.create!(passenger: passenger_4, flight: flight_3) }
   let!(:pass_flight_10) { PassengerFlight.create!(passenger: passenger_4, flight: flight_4) }
 
-  it "lists unique names of adult passengers that have flights on that airline" do
+  it "lists unique names of adult passengers (18 years old or above) that have flights with that airline" do
     visit airline_path(airline_1)
 
     expect(page).to have_content('Bill Seacaster')

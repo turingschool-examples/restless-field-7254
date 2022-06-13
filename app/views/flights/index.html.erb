@@ -5,7 +5,8 @@
   <p><%= flight.number %></p>
   <p><%= flight.airline.name %></p>
   <% flight.passengers.each do |ilda| %>
-    <p><%= ilda.name %></p>
+    <%= ilda.name %>
+    <%= <%= link_to 'Remove Passenger', path %>%>
   <% end %>
 </div>
 <% end %>

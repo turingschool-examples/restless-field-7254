@@ -46,7 +46,7 @@ RSpec.describe 'airline show page' do
     PassengerFlight.create(passenger_id: pass11.id, flight_id: flight2.id)
     PassengerFlight.create(passenger_id: pass12.id, flight_id: flight3.id)
 
-    visit airlines_path(airline1.id)
+    visit airline_path(airline1.id)
 
     expect(page).to have_content('John Wisbrook')
     expect(page).to have_content('Kate Wisbrook')

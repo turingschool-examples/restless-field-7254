@@ -31,11 +31,11 @@ RSpec.describe Flight, type: :feature do
 
 
       visit "/flights"
-
+      # save_and_open_page
 
       within "#flight-#{flight_1.id}" do
         expect(page).to have_content(flight_1.number)
-        expect(page).to have_content(flight_1.airline)
+        expect(page).to have_content(flight_1.airline.name)
         expect(page).to have_content(passenger_1.name)
         expect(page).to have_content(passenger_4.name)
         expect(page).to_not have_content(flight_2.number)
@@ -45,7 +45,7 @@ RSpec.describe Flight, type: :feature do
 
       within "#flight-#{flight_2.id}" do
         expect(page).to have_content(flight_2.number)
-        expect(page).to have_content(flight_2.airline)
+        expect(page).to have_content(flight_2.airline.name)
         expect(page).to have_content(passenger_1.name)
         expect(page).to_not have_content(flight_1.number)
         expect(page).to_not have_content(flight_3.number)
@@ -54,7 +54,7 @@ RSpec.describe Flight, type: :feature do
 
       within "#flight-#{flight_3.id}" do
         expect(page).to have_content(flight_3.number)
-        expect(page).to have_content(flight_3.airline)
+        expect(page).to have_content(flight_3.airline.name)
         expect(page).to have_content(passenger_2.name)
         expect(page).to_not have_content(flight_2.number)
         expect(page).to_not have_content(flight_1.number)
@@ -63,7 +63,7 @@ RSpec.describe Flight, type: :feature do
 
       within "#flight-#{flight_4.id}" do
         expect(page).to have_content(flight_4.number)
-        expect(page).to have_content(flight_4.airline)
+        expect(page).to have_content(flight_4.airline.name)
         expect(page).to have_content(passenger_3.name)
         expect(page).to have_content(passenger_5.name)
         expect(page).to_not have_content(flight_1.number)

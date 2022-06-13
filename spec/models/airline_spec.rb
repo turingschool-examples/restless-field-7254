@@ -37,7 +37,7 @@ RSpec.describe Airline, type: :model do
     end
 
     it 'can return an array of passengers who are over 18 and on a flight by this airline' do
-      expect(@united.all_names.pluck(:name)).to eq(["Casey", "Deannah", "Jimbob", "Parker", "Sally"])
+      expect(@united.all_adult_passengers.pluck(:name)).to eq(["Casey", "Deannah", "Jimbob", "Parker", "Sally"]) #Set order to name to help accurately test outcome
     end
   end
 end

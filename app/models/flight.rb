@@ -6,4 +6,8 @@ class Flight < ApplicationRecord
   def passenger_names
     passengers.pluck(:name)
   end
+
+  def flyable_passengers
+    passengers.where(status: true)
+  end
 end

@@ -61,7 +61,7 @@ Some of the initial migrations and model set up has been done for you.
 
 ## Database Diagram
 
-https://user-images.githubusercontent.com/99001315/173264726-41cf78ac-ae7f-4fe2-953c-18dee4749900.png
+<img width="848" alt="Screen Shot 2022-06-12 at 7 41 05 PM" src="https://user-images.githubusercontent.com/99001315/173264726-41cf78ac-ae7f-4fe2-953c-18dee4749900.png">
 
 ## User Stories
 

@@ -106,6 +106,8 @@ RSpec.describe Flight, type: :feature do
 
       visit "/flights"
 
+      # save_and_open_page
+
       within "#flight-#{flight_1.id}" do
         expect(page).to have_link("Remove #{passenger_1.name} from this flight")
         expect(page).to have_link("Remove #{passenger_4.name} from this flight")
@@ -125,7 +127,7 @@ RSpec.describe Flight, type: :feature do
       end
 
       within "#flight-#{flight_1.id}" do
-        click_link("Remove #{passenger_3.name} from this flight")
+        click_link("Remove #{passenger_1.name} from this flight")
       end
 
       expect(current_path).to eq("/flights")

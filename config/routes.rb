@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
 
   get '/flights', to: 'flights#index'
+  delete '/flights/:f_id/passengers/:p_id', to: 'passenger_flights#destroy'
 
 end

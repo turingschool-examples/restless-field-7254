@@ -116,7 +116,7 @@ RSpec.describe 'flights index page' do
       expect(page).to have_content('John Wisbrook')
       expect(page).to have_content('Kate Wisbrook')
       expect(page).to_not have_content('Spur Salmon')
-      click_link('Remove Passenger')
+      first(:link, 'Remove Passenger').click
     end
 
     expect(current_path).to eq '/flights'
@@ -130,7 +130,7 @@ RSpec.describe 'flights index page' do
     within "#flight#{flight3.id}" do
       expect(page).to have_content('Caren Longsby')
       expect(page).to_not have_content('Spur Salmon')
-      click_link('Remove Passenger')
+      first(:link, 'Remove Passenger').click
     end
 
     expect(current_path).to eq '/flights'

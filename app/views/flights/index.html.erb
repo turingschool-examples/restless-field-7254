@@ -5,7 +5,9 @@
     Flight Number: <%= flight.number %> Airline: <%= flight.airline.name %><br>
     Passengers:<br>
     <% flight.passengers.each do |passenger| %><br>
-      <%= passenger.name %>
+      <div id='passenger-<%= passenger.id %>'>
+        <%= passenger.name %>
+      </div>
     <% end %>
   </div>
 <% end %>

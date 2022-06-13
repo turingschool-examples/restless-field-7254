@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Airline, type: :model do
   it { should have_many :flights }
+  it { should have_many(:passengers).through(:flights)}
   
   describe "instance methods" do
 
@@ -28,8 +29,8 @@ RSpec.describe Airline, type: :model do
       end
 
       it "returns all passengers that have flights on the airline that are 18 or older" do
-        expect(@american.adult_passengers.map{|pass| pass.id}).to eq([@pass_1.id, @pass_2.id, @pass_3.id])
-        expect(@delta.adult_passengers.map{|pass| pass.id}).to eq([@pass_4.id])
+        expect(@american.adult_passengers).to eq([@pass_1, @pass_2, @pass_3])
+        expect(@delta.adult_passengers).to eq([@pass_4])
       end
     end
   end

@@ -8,14 +8,14 @@ RSpec.describe "Airlines Show Page", type: :feature do
     fly3 = air1.flights.create!(number: "444", date: "06/16/22", arrival_city: "Langston", departure_city: "Tampa")
     fly4 = air1.flights.create!(number: "101", date: "06/16/22", arrival_city: "Tampa", departure_city: "Santa Fe")
 
-    sally = Passenger.create!(name: "Sally", age: 20)
-    sam = Passenger.create!(name: "Sam", age: 10)
-    scott = Passenger.create!(name: "Scott", age: 18)
-    susan = Passenger.create!(name: "Susan", age: 43)
-    luke = Passenger.create!(name: "Luke", age: 31)
-    liam = Passenger.create!(name: "Liam", age: 2)
-    lindsey = Passenger.create!(name: "Lindsey", age: 40)
-    laura = Passenger.create!(name: "Laura", age: 40)
+    sally = Passenger.create!(name: "Sally", age: 20, status: true)
+    sam = Passenger.create!(name: "Sam", age: 10, status: true)
+    scott = Passenger.create!(name: "Scott", age: 18, status: true)
+    susan = Passenger.create!(name: "Susan", age: 43, status: true)
+    luke = Passenger.create!(name: "Luke", age: 31, status: true)
+    liam = Passenger.create!(name: "Liam", age: 2, status: true)
+    lindsey = Passenger.create!(name: "Lindsey", age: 40, status: true)
+    laura = Passenger.create!(name: "Laura", age: 40, status: true)
 
     flypass1 = FlightPassenger.create!(flight_id: fly1.id, passenger_id: sally.id)
     flypass2 = FlightPassenger.create!(flight_id: fly1.id, passenger_id: sam.id)
@@ -32,6 +32,6 @@ RSpec.describe "Airlines Show Page", type: :feature do
 
     visit airline_path(air1)
 
-    expect(page).to have_content("Passengers: Sally, Scott, Susan, Luke, Lindsey, Laura")
+    expect(page).to have_content("Passengers: Laura, Lindsey, Luke, Sally, Scott, Susan")
   end
 end

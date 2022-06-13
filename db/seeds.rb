@@ -7,7 +7,7 @@
 @flight_1 = @american.flights.create!(number: '3940', date: '3/10/2022', departure_city: 'Detroit', arrival_city: 'Orlando')
 @flight_2 = @american.flights.create!(number: '9091', date: '5/17/2022', departure_city: 'Chicago', arrival_city: 'Kansas City')
 @flight_3 = @american.flights.create!(number: '6798', date: '10/9/2022', departure_city: 'Tulsa', arrival_city: 'Fresno')
-@flight_5 = @american.flights.create!(number: '9665', date: '11/22/2022', departure_city: 'Durham', arrival_city: 'New Orleans')
+@flight_4 = @american.flights.create!(number: '9665', date: '11/22/2022', departure_city: 'Durham', arrival_city: 'New Orleans')
 
 @passenger_1 = Passenger.create!(name: 'Brennan Lee Mulligan', age: 13)
 @passenger_2 = Passenger.create!(name: 'Aabria Iyengar', age: 9)
@@ -15,8 +15,8 @@
 @passenger_4 = Passenger.create!(name: 'Misty Moore', age: 44)
 @passenger_5 = Passenger.create!(name: 'Kingston Brown', age: 84)
 
-fp_1 = FlightPassenger.create!(flight_id: , passenger_id: )
-fp_2 = FlightPassenger.create!(flight_id: , passenger_id: )
-fp_3 = FlightPassenger.create!(flight_id: , passenger_id: )
-fp_4 = FlightPassenger.create!(flight_id: , passenger_id: )
-fp_5 = FlightPassenger.create!(flight_id: , passenger_id: )
+# fp_1 = FlightPassenger.create!(flight_id: , passenger_id: )
+# fp_2 = FlightPassenger.create!(flight_id: , passenger_id: )
+# fp_3 = FlightPassenger.create!(flight_id: , passenger_id: )
+# fp_4 = FlightPassenger.create!(flight_id: , passenger_id: )
+# fp_5 = FlightPassenger.create!(flight_id: , passenger_id: )

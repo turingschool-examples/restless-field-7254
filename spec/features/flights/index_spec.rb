@@ -14,12 +14,25 @@ RSpec.describe "flight index page" do
 
   it "shows all flight numbers with airline name" do
     visit flights_path
-    save_and_open_page
     expect(page).to have_content("Flight Number: 1234")
     expect(page).to have_content("Flight Number: 5678")
     expect(page).to have_content("Airline: United Airlines")
     expect(page).to have_content("Passengers: Nick")
     expect(page).to have_content("Passengers: Sarah")
+  end
+
+  it "can delete a passenger from a flight" do
+    visit flights_path
+    expect(page).to have_content("Passengers: Nick")
+    expect(page).to have_button("Remove Passenger", count: 2)
+
+    click_button("Remove Passenger", match: :first)
+    expect(current_path).to eq(flights_path)
+    save_and_open_page
+
+    expect(page).to have_button("Remove Passenger", count: 1)
+
+    expect(page).to_not have_content("Passengers: Nick")
   end
 
 end

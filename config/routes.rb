@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   delete "/passenger_flights/:flight_id/:passenger_id", to: "passenger_flights#destroy"
   # resources :passenger_flights, only: [:destroy]
 
+  resources :airlines, only: [:show]
+
 end

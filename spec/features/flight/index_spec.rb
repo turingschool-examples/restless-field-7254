@@ -40,8 +40,8 @@ RSpec.describe 'Flights index page', type: :feature do
 
     expect(page).to have_link('Remove Passenger From Flight')
 
-    within "#passenger-#{@passenger_1.id}" do
-      click_on 'Remove Passenger From Doctor'
+    within "#passenger-#{@passenger_1.name}" do
+      click_on 'Remove Passenger From Flight'
     end
 
     expect(current_path).to eq(flights_path)

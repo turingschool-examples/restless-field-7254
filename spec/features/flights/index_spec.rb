@@ -6,8 +6,8 @@ RSpec.describe "flights index page" do
     southwest = Airline.create!(name: "Southwest")
     flight1 = frontier.flights.create!(number: "F234", date: "03/24/2022", departure_city: "Denver", arrival_city: "Los Angeles")
     flight2 = frontier.flights.create!(number: "F345", date: "03/25/2022", departure_city: "Denver", arrival_city: "Seattle")
-    flight3 = frontier.flights.create!(number: "S456", date: "03/24/2022", departure_city: "Denver", arrival_city: "New Orleans")
-    flight4 = frontier.flights.create!(number: "S567", date: "03/25/2022", departure_city: "Denver", arrival_city: "Dallas")
+    flight3 = southwest.flights.create!(number: "S456", date: "03/24/2022", departure_city: "Denver", arrival_city: "New Orleans")
+    flight4 = southwest.flights.create!(number: "S567", date: "03/25/2022", departure_city: "Denver", arrival_city: "Dallas")
     passenger1 = flight1.passengers.create!(name: "Sarah Micheals", age: 22)
     passenger2 = flight1.passengers.create!(name: "Micheal Stevens", age: 34)
     passenger3 = flight2.passengers.create!(name: "Ray Charles", age: 67)
@@ -18,6 +18,7 @@ RSpec.describe "flights index page" do
     passenger8 = flight4.passengers.create!(name: "Rapunzel", age: 23)
 
     visit "/flights"
+    save_and_open_page
     expect(page).to have_content("Flight: F234")
     expect(page).to have_content("Flight: F345")
     expect(page).to have_content("Flight: S456")

@@ -26,8 +26,10 @@ RSpec.describe 'Flight Index Page', type: :feature do
 
 
       visit flights_path
+      expect(page).to have_content("All Flights")
+      save_and_open_page
       within "#flight-#{flight.id}" do 
-        expect(page).to have_content(flight.name)
+        expect(page).to have_content(flight.number)
         expect(page).to have_content(frontier.name)
         expect(page).to have_content(passenger.name)
         expect(page).to have_content(passenger2.name)
@@ -35,8 +37,8 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to_not have_content(delta.name)
       end
 
-      within "#flight-#{flight.id}" do 
-        expect(page).to have_content(flight2.name)
+      within "#flight-#{flight2.id}" do 
+        expect(page).to have_content(flight2.number)
         expect(page).to have_content(frontier.name)
         expect(page).to have_content(passenger3.name)
         expect(page).to have_content(passenger4.name)
@@ -44,8 +46,8 @@ RSpec.describe 'Flight Index Page', type: :feature do
         expect(page).to_not have_content(delta.name)
       end
       
-      within "#flight-#{flight.id}" do 
-        expect(page).to have_content(flight3.name)
+      within "#flight-#{flight3.id}" do 
+        expect(page).to have_content(flight3.number)
         expect(page).to have_content(delta.name)
         expect(page).to have_content(passenger5.name)
         expect(page).to have_content(passenger6.name)

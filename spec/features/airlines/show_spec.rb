@@ -17,8 +17,8 @@ RSpec.describe "Airline Show Page", type: :feature do
 
   expect(page).to have_content("Passenger: Joe")
   expect(page).to have_content("Passenger: Eliza")
-  expect(page).to_not have_content("Passenger: Dunkin")
-  expect(page).to_not have_content("Passenger: Albert")
-  expect(page).to_not have_content("Passenger: Kid")
+  expect(page).to have_content("Passenger: Dunkin")
+  expect(page).to_not have_content("Albert")
+  expect(page).to_not have_content("Kid")
   end
 end

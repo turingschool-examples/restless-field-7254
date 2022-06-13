@@ -5,4 +5,9 @@ class Flight < ApplicationRecord
   has_many :passengers, through: :flight_passengers
 
   validates_presence_of :number, :date, :departure_city, :arrival_city, :airline_id
+
+  def airline_name
+    airline.name
+  end
+
 end

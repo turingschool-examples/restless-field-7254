@@ -52,6 +52,7 @@ RSpec.describe 'airline show page' do
     expect(page).to have_content('Kate Wisbrook')
     expect(page).to have_content('Alex Spoop')
     expect(page).to have_content('Caren Longsby')
+    expect(page).to have_content('Loop Lensfield')
 
     expect(page).to_not have_content('Kelp Kenwood')
     expect(page).to_not have_content('Jorge Jorgenson')

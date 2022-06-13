@@ -36,6 +36,7 @@ RSpec.describe Airline, type: :model do
 
     describe 'unique_adult_passengers' do
       it "returns a unique list of passengers 18 years of age or older" do
+        
         expect(@airline1.unique_adult_passengers.first.name).to eq("Jenn")
         expect(@airline1.unique_adult_passengers.second.name).to eq("Eric")
         expect(@airline1.unique_adult_passengers.last.name).to eq("Rory")

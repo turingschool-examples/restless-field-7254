@@ -40,7 +40,6 @@ RSpec.describe 'flights#index', type: :feature do
     within "#flight-#{@f1.id}" do
       expect(page).to have_content(@p1.name)
       expect(page).to have_content(@p2.name)
-
       within "#passenger-#{@p1.id}" do
         click_on 'Remove'
       end

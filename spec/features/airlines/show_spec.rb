@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  it { should have_many :flights }
-  it { should have_many(:flight_passengers).through(:flights) }
-  it { should have_many(:passengers).through(:flight_passengers) }
-
+RSpec.describe 'Flights Index' do
   before :each do
     @delta = Airline.create!(name: "Delta")
     @flight_1 = Flight.create!(number: "3124", date: "Sept 3, 1999", departure_city: "NYC", arrival_city: "Cuzco", airline_id: @delta.id)
@@ -25,10 +21,10 @@ RSpec.describe Airline, type: :model do
     @flight_passenger_6 = FlightPassenger.create!(flight_id: @flight_2.id, passenger_id: @deana.id)
   end
 
-  it '#adult-passengers' do
-    result = @delta.adult_passengers.each do |name|
-      name
-    end
-    expect(result).to eq([@horatio, @deana])
+  it 'shows all unique adult passengers' do
+    visit "/airlines/#{@delta.id}"
+
+    expect(page).to have_content("Horatio")
+    expect(page).to have_content("Deana")
   end
 end

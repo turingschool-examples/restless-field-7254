@@ -66,6 +66,8 @@ RSpec.describe "flights index page" do
   end
 
   it 'can remove passenger from flight' do
+    FlightPassenger.create!(flight: @flight_2, passenger: @pass_1)
+
     visit "/flights"
 
     within "#flight-0" do

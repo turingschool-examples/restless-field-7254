@@ -1,0 +1,15 @@
+<h1>All Flights</h1>
+
+
+  <% @flights.each do |flight| %>
+  <div id="flight-<%= flight.id %>" >
+    <p>Flight: <%= flight.number %>, <%= flight.airline.name %></p>
+      <p>Passengers: </p>
+        <% flight.flyable_passengers.each do |passenger| %>
+        <div id="passenger-<%= passenger.id %>">
+        <p><%= passenger.name %></p>
+        <%= button_to "Remove Passenger", flight_passenger_path(flight, passenger), method: :patch, params: { status: false } %>
+        </div>
+      <% end %>
+  </div>
+  <% end %>

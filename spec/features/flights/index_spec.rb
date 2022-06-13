@@ -64,5 +64,8 @@ RSpec.describe "Flight Index Page", type: :feature do
       expect(page).to_not have_content("Passenger: #{passenger1.name}")
 
     end
+    within '.removed-passengers' do
+      expect(page).to have_content("Passenger: Joe")
+    end
   end
 end

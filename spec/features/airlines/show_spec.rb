@@ -68,4 +68,13 @@ RSpec.describe 'Airline show page', type: :model do
     expect(page.all('.airlinePassenger')[3]).to have_content("Jimbob")
     expect(page.all('.airlinePassenger')[4]).to have_content("Sally")
   end
+
+  it 'has the passenger list sorted by most flights taken' do
+    visit "/airlines/#{@united.id}"
+
+    expect("Casey").to appear_before("Deannah", only_text: true)
+    expect("Deannah").to appear_before("Parker", only_text: true)
+    expect("Parker").to appear_before("Jimbob", only_text: true)
+    expect("Jimbob").to appear_before("Sally", only_text: true)
+  end
 end

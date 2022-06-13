@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+FlightPassenger.destroy_all
+Passenger.destroy_all
+Flight.destroy_all
+Airline.destroy_all
+
 passenger1 = Passenger.create(name: "Brennan Lee Mulligan", age: 13)
 passenger2 = Passenger.create(name: "Aabria Iyengar", age: 9)
 passenger3 = Passenger.create(name: "Bill Seacaster", age: 46)
@@ -39,3 +44,8 @@ flight_passenger12 = FlightPassenger.create(flight: flight2, passenger: passenge
 flight_passenger13 = FlightPassenger.create(flight: flight3, passenger: passenger5)
 flight_passenger14 = FlightPassenger.create(flight: flight4, passenger: passenger1)
 flight_passenger15 = FlightPassenger.create(flight: flight5, passenger: passenger2)
+flight_passenger16 = FlightPassenger.create(flight: flight1, passenger: passenger4)
+flight_passenger17 = FlightPassenger.create(flight: flight2, passenger: passenger5)
+flight_passenger18 = FlightPassenger.create(flight: flight3, passenger: passenger1)
+flight_passenger19 = FlightPassenger.create(flight: flight4, passenger: passenger2)
+flight_passenger20 = FlightPassenger.create(flight: flight5, passenger: passenger3)

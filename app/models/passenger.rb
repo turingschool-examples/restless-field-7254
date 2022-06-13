@@ -6,4 +6,5 @@ class Passenger < ApplicationRecord
     flight_passengers.where("flight_id = #{flight}").first
   end
   
+  
 end

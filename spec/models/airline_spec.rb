@@ -11,7 +11,7 @@ RSpec.describe Airline, type: :model do
       @delta = Airline.create!(name: 'Delta')
       @flight_1 = @american.flights.create!(number: '1', date: '01/01/2201', departure_city: "San Francisco", arrival_city: "New York City")
       @flight_2 = @american.flights.create!(number: '2', date: '01/01/2202', departure_city: "Dallas", arrival_city: "Denver")
-      @flight_3 = @delta.flights.create!(number: '3', date: '01/01/2203', departure_city: "New Orleans", arrival_city: "Los Angeles")
+      @flight_3 = @american.flights.create!(number: '3', date: '01/01/2203', departure_city: "New Orleans", arrival_city: "Los Angeles")
       @flight_4 = @delta.flights.create!(number: '4', date: '01/01/2204', departure_city: "Charollete", arrival_city: "Seattle")
       @bob = Passenger.create!(name: 'Bob', age: 37)
       @jane = Passenger.create!(name: 'Jane', age: 30)
@@ -22,17 +22,26 @@ RSpec.describe Airline, type: :model do
       FlightPassenger.create!(flight: @flight_1, passenger: @bob)
       FlightPassenger.create!(flight: @flight_1, passenger: @jane)
       FlightPassenger.create!(flight: @flight_1, passenger: @alex)
+      FlightPassenger.create!(flight: @flight_1, passenger: @tom)
+      FlightPassenger.create!(flight: @flight_2, passenger: @alex)
       FlightPassenger.create!(flight: @flight_2, passenger: @bob)
       FlightPassenger.create!(flight: @flight_2, passenger: @mary)
+      FlightPassenger.create!(flight: @flight_2, passenger: @jane)
       FlightPassenger.create!(flight: @flight_2, passenger: @tom)
-      FlightPassenger.create!(flight: @flight_3, passenger: @bob)
+      FlightPassenger.create!(flight: @flight_3, passenger: @tom)
+      FlightPassenger.create!(flight: @flight_3, passenger: @jane)
       FlightPassenger.create!(flight: @flight_3, passenger: @joe)
     end
 
     it "finds all unqiue adult passengers for an airline " do
-      expect(@american.find_adult_passengers).to eq([@bob, @jane, @alex, @mary])
-      expect(@american.find_adult_passengers).to_not eq([@bob, @jane, @alex, @mary, @tom])
+      expect(@american.find_adult_passengers).to eq([@bob, @jane, @alex, @mary, @joe])
+      expect(@american.find_adult_passengers).to_not eq([@bob, @jane, @alex, @mary, @tom, @joe])
     end
+    
+    it "sorts passengers by number of flights taken" do
+      expect(@american.sort_adult_passengers_by_flight_count[0..2]).to eq([@jane, @bob, @alex])
+    end
+    
     
   end
     

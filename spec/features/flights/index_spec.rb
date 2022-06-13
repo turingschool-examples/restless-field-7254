@@ -1,16 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  describe 'relationships' do
-    it { should have_many(:flights) }
-    it { should have_many(:passenger_flights).through(:flights) }
-    it { should have_many(:passengers).through(:passenger_flights) }
-  end
-
-  describe 'validations' do
-    it { should validate_presence_of(:name) }
-  end
-
+RSpec.describe "Flights Index Page" do
   let!(:airline_1) { Airline.create!(name: "Delta") }
 
   let!(:flight_1) { airline_1.flights.create!(number: "7990", date: "08/03/20", departure_city: "Denver", arrival_city: "Chicago") }
@@ -33,18 +23,37 @@ RSpec.describe Airline, type: :model do
   let!(:pass_flight_7) { PassengerFlight.create!(passenger: passenger_4, flight: flight_3) }
   let!(:pass_flight_8) { PassengerFlight.create!(passenger: passenger_5, flight: flight_3) }
 
-  describe '#adult_passengers' do
-    it "returns a unique list of adult passengers (18 years old or above) that have flights with a specific airline" do
-      expect(airline_1.adult_passengers).to eq([passenger_3, passenger_4, passenger_5])
+  it "lists all flight numbers, the name of their airline, and the names of all passengers on that flight" do
+    visit flights_path
+
+    within "#flight-#{flight_1.id}" do
+      expect(page).to have_content('Flight 7990')
+      expect(page).to have_content('Delta')
+      expect(page).to have_content('Brennan Lee Mulligan')
+      expect(page).to have_content('Bill Seacaster')
+    end
+
+    within "#flight-#{flight_2.id}" do
+      expect(page).to have_content('Flight 3940')
+      expect(page).to have_content('Delta')
+      expect(page).to have_content('Abria Iyengar')
+      expect(page).to have_content('Misty Moore')
     end
   end
 
-  describe '#frequent_flyers' do
-    it "returns a list of adult passengers sorted by the number of flights each passenger has taken on the airline from most to least" do
-      expect(airline_1.frequent_flyers).to eq([passenger_4, passenger_3, passenger_5])
-      expect(airline_1.frequent_flyers[0].flights.count).to eq(3)
-      expect(airline_1.frequent_flyers[1].flights.count).to eq(2)
-      expect(airline_1.frequent_flyers[2].flights.count).to eq(1)
+  it "can click a button to remove a specific passenger from a flight" do
+    visit flights_path
+    
+    within "#flight-#{flight_1.id}" do
+      expect(page).to have_content('Brennan Lee Mulligan')
+      click_button "Remove Brennan Lee Mulligan"
+      expect(page).to_not have_content('Brennan Lee Mulligan')
+    end
+
+    within "#flight-#{flight_2.id}" do
+      expect(page).to have_content('Abria Iyengar')
+      click_button "Remove Abria Iyengar"
+      expect(page).to_not have_content('Abria Iyengar')
     end
   end
 end

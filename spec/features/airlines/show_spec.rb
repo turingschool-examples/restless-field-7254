@@ -4,7 +4,6 @@ RSpec.describe "Airlines show page" do
   before :each do
     @airline1 = Airline.create!(name: "American")
 
-
     @flight1 = Flight.create!(number: "7790", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas", airline_id: "#{@airline1.id}")
     @flight2 = Flight.create!(number: "7790", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas", airline_id: "#{@airline1.id}")
 

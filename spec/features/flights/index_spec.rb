@@ -5,8 +5,6 @@ RSpec.describe "Flights index page" do
     @airline1 = Airline.create!(name: "American")
     @airline2 = Airline.create!(name: "Delta")
     @airline3 = Airline.create!(name: "JetBlue")
-    @airline4 = Airline.create!(name: "Southwest")
-    @airline5 = Airline.create!(name: "United")
 
     @flight1 = Flight.create!(number: "7790", date: "2/7/2022", departure_city: "Glendale", arrival_city: "Dallas", airline_id: "#{@airline1.id}")
     @flight2 = Flight.create!(number: "3940", date: "3/10/2022", departure_city: "Detroit", arrival_city: "Orlando", airline_id: "#{@airline2.id}")
@@ -53,15 +51,13 @@ RSpec.describe "Flights index page" do
   end
 
   it "has button to remove passenger from flight" do
-    visit "/flights"
-
     within "##{@bre.id}" do
       expect(page).to have_content("Brennan Lee Mulligan")
       expect(page).to have_link("Remove Passenger")
       click_link "Remove Passenger"
     end
-    expect(current_path).to eq(flights_path)
 
+    expect(current_path).to eq(flights_path)
     expect(page).to_not have_content("Brennan Lee Mulligan")
   end
 end

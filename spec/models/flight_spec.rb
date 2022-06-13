@@ -31,10 +31,10 @@ RSpec.describe Flight, type: :model do
       FlightPassenger.create!(flight: flight4, passenger: jes)
       FlightPassenger.create!(flight: flight4, passenger: nadine)
 
-      expect(flight1.all_passenger_names).to eq(["Mike", "Dani"])
-      expect(flight2.all_passenger_names).to eq(["Jeni", "Theo"])
-      expect(flight3.all_passenger_names).to eq(["Jordan"])
-      expect(flight4.all_passenger_names).to eq(["Jes", "Nadine"])
+      expect(flight1.all_passenger_names).to eq("Mike, Dani")
+      expect(flight2.all_passenger_names).to eq("Jeni, Theo")
+      expect(flight3.all_passenger_names).to eq("Jordan")
+      expect(flight4.all_passenger_names).to eq("Jes, Nadine")
     end
   end
 end

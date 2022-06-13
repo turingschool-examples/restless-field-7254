@@ -1,0 +1,10 @@
+
+<h1>Arrivals and Departures</h1>
+<% @flights.each do |flight| %>
+<section id='flight-<%=flight.id%>'>
+  <p>Flight: <%= flight.number %> Airline: <%= flight.airline.name %></p>
+  <p>Passengers: <% flight.passengers.each do |passenger| %>
+      <p><%= passenger.name %><%= button_to "BuhBye #{passenger.name}", "/flights/#{flight.id}/passengers/#{passenger.id}", method: :delete, params: {flight_id: flight.id, passenger_id: passenger.id} %>,</p>
+    <%end%>
+    </section>
+    <%end%>

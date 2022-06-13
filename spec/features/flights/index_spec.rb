@@ -56,6 +56,30 @@ RSpec.describe 'Flights Index Page' do
             end
         end
         
+        it "has a buttom next to each passenger to remove them from a flight" do
+            visit flights_path
+            within "#flight-#{@flight_1.id}" do
+                expect(page).to have_content("Bob")
+                expect(page).to have_content("Jane")
+                expect(page).to have_content("Alex")
+                click_button 'Remove Jane'
+                expect(page).to have_content("Bob")
+                expect(page).to_not have_content("Jane")
+                expect(page).to have_content("Alex")
+                click_button 'Remove Bob'
+                expect(page).to_not have_content("Bob")
+                expect(page).to_not have_content("Jane")
+                expect(page).to have_content("Alex")
+            end
+            within "#flight-#{@flight_2.id}" do
+                expect(page).to have_content("Bob")
+                expect(page).to have_content("Mary")
+                click_button 'Remove Bob'
+                click_button 'Remove Mary'
+                expect(page).to_not have_content("Bob")
+                expect(page).to_not have_content("Mary")
+            end
+        end
         
     end
     

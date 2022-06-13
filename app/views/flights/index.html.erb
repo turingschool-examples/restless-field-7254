@@ -12,7 +12,7 @@
         <li><%= passenger.name %></li>
         <li><%= passenger.age %></li>
       </ul>
-      <%= link_to 'Remove Passenger', passenger_flight_path(passenger_id: passenger.id, flight_id: flight.id), method: :delete%>
+      <%= link_to 'Remove Passenger', passenger_flight_path(id: passenger.flight_association(flight.id)), method: :delete%>
     <% end %>
   </div>
 <% end %>

@@ -22,7 +22,12 @@ RSpec.describe Airline, type: :model do
       @shane = Passenger.create!(name: "Shane", age: 18)
       @jack = Passenger.create!(name: "Jack", age: 18)
       FlightPassenger.create!(flight_id: @flight1.id, passenger_id: @bob.id)
+      FlightPassenger.create!(flight_id: @flight2.id, passenger_id: @bob.id)
+      FlightPassenger.create!(flight_id: @flight3.id, passenger_id: @bob.id)
+      FlightPassenger.create!(flight_id: @flight1.id, passenger_id: @joe.id)
       FlightPassenger.create!(flight_id: @flight2.id, passenger_id: @joe.id)
+      FlightPassenger.create!(flight_id: @flight3.id, passenger_id: @joe.id)
+      FlightPassenger.create!(flight_id: @flight4.id, passenger_id: @joe.id)
       FlightPassenger.create!(flight_id: @flight3.id, passenger_id: @carol.id)
       FlightPassenger.create!(flight_id: @flight3.id, passenger_id: @rick.id)
       FlightPassenger.create!(flight_id: @flight2.id, passenger_id: @shane.id)
@@ -30,6 +35,10 @@ RSpec.describe Airline, type: :model do
     end
     it "#only_adults only returns passengers greater or equal to 18 in age" do
       expect(@spirit.only_adults).to eq([@bob, @joe, @shane])
+    end
+
+    it "#frequent_flyers" do
+      expect(@spirit.frequent_flyers).to eq([@joe, @bob, @shane])
     end
   end
 end

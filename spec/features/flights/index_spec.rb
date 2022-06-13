@@ -16,6 +16,10 @@ RSpec.describe "Flights index page" do
     @aab = Passenger.create!(name: "Aabria Iyengar", age: 9)
     @bill = Passenger.create!(name: "Bill Seacaster", age: 46)
     @misty = Passenger.create!(name: "Misty Moore", age: 44)
+
+    @fp1 = FlightPassenger.create!(passenger_id: "#{@bre.id}", flight_id: "#{@flight1.id}")
+    @fp2 = FlightPassenger.create!(passenger_id: "#{@aab.id}", flight_id: "#{@flight2.id}")
+    @fp3 = FlightPassenger.create!(passenger_id: "#{@bill.id}", flight_id: "#{@flight3.id}")
   end
 
   it "shows all flight numbers" do
@@ -35,5 +39,28 @@ RSpec.describe "Flights index page" do
 
     expect(page).to_not have_content("Southwest")
     expect(page).to_not have_content("United")
+  end
+
+  it "shows names of all passengers on each flight" do
+    visit "/flights"
+
+    expect(page).to have_content("Brennan Lee Mulligan")
+    expect(page).to have_content("Aabria Iyengar")
+    expect(page).to have_content("Bill Seacaster")
+
+    expect(page).to_not have_content("Misty Moore")
+
+    # within "#flight-#{@flight1.id}" do
+    #   require "pry"; binding.pry
+    #   expect(page).to have_content("Brennan Lee Mulligan")
+    # end
+    # within "#flight-#{@flight2.id}" do
+    #   require "pry"; binding.pry
+    #   expect(page).to have_content("Aabria Iyengar")
+    # end
+    # within "#flight-#{@flight3.id}" do
+    #   require "pry"; binding.pry
+    #   expect(page).to have_content("Bill Seacaster")
+    # end
   end
 end

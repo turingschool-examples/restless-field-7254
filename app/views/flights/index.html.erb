@@ -1,3 +1,8 @@
 <% @flights.each do |flight| %>
-<%= flight.number %> <%= flight.airline.name %>
-<% end %>
+<div id="flight-<%=  flight.id %>">
+  <%= flight.number %> <%= flight.airline.name %>
+  <%= flight.passengers.each do |passenger| %>
+    <%= passenger.name %>
+    <% end %>
+  <% end %>
+</div>

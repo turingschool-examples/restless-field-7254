@@ -32,7 +32,7 @@ RSpec.describe 'Airline Show Page', type: :feature do
 
       visit airline_path(southwest.id)
       expect(page).to have_content(southwest.name)
-      expect(page).to have_content(passenger1.name, count: 1)
+      expect(page).to have_content(passenger.name, count: 1)
       expect(page).to have_content(passenger4.name, count: 1)
       expect(page).to have_content(passenger5.name, count: 1)
       expect(page).to have_content(passenger6.name, count: 1)

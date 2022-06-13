@@ -1,0 +1,5 @@
+<h1>Airline Show Page</h1>
+<h2>Passengers:</h2>
+<% @airline.unique_and_above_18.each do |passenger| %>
+  <p>Passenger: <%= passenger %></p>
+  <% end %>

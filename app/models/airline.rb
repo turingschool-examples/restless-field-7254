@@ -6,6 +6,6 @@ class Airline < ApplicationRecord
   validates_presence_of :name
 
   def adult_passengers
-    require "pry"; binding.pry
+    passengers.where('age >= 18').distinct
   end
 end

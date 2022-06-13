@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "flight index" do
+RSpec.describe 'airline show page' do
   before(:each) do
     @airline1 = Airline.create!(name: "American")
     @airline2 = Airline.create!(name: "Delta")
@@ -17,39 +17,29 @@ RSpec.describe "flight index" do
     @passenger2 = Passenger.create!(name: 'Bill', age: 2)
     @passenger3 = Passenger.create!(name: 'Alex', age: 55)
     @passenger4 = Passenger.create!(name: 'Tim', age: 11)
+    @passenger5 = Passenger.create!(name: 'Jim', age: 44)
+    @passenger6 = Passenger.create!(name: 'Kit', age: 57)
+    @passenger7 = Passenger.create!(name: 'Dead', age: 100)
 
     @passflight1 = PassengerFlight.create!(passenger_id: @passenger1.id, flight_id: @flight1.id)
     @passflight2 = PassengerFlight.create!(passenger_id: @passenger2.id, flight_id: @flight1.id)
     @passflight3 = PassengerFlight.create!(passenger_id: @passenger3.id, flight_id: @flight2.id)
     @passflight4 = PassengerFlight.create!(passenger_id: @passenger4.id, flight_id: @flight2.id)
+    @passflight5 = PassengerFlight.create!(passenger_id: @passenger5.id, flight_id: @flight2.id)
+    @passflight6 = PassengerFlight.create!(passenger_id: @passenger6.id, flight_id: @flight1.id)
+    @passflight7 = PassengerFlight.create!(passenger_id: @passenger7.id, flight_id: @flight4.id)
   end
 
-  it "lists all flights, their airline, and all passengers on the flight" do
-    visit "/flights"
+  it "displays a list of adult passengers with a flight with the given airline " do
+    visit "/airlines/#{@airline1.id}"
 
-    within(".flight-#{@flight1.id}") do
-      expect(page).to have_content(@flight1.number)
-      expect(page).to have_content(@airline1.name)
-      expect(page).to have_content(@passenger1.name)
-      expect(page).to have_content(@passenger2.name)
-      expect(page).to_not have_content(@passenger3.name)
-      expect(page).to_not have_content(@passenger4.name)
-      expect(page).to_not have_content(@airline2.name)
-      expect(page).to_not have_content(@flight2.number)
-    end
+    expect(page).to have_content(@passenger1.name)
+    expect(page).to have_content(@passenger6.name)
+    expect(page).to have_content(@passenger3.name)
+    expect(page).to have_content(@passenger5.name)
+    expect(page).to_not have_content(@passenger4.name)
+    expect(page).to_not have_content(@passenger2.name)
+    expect(page).to_not have_content(@passenger7.name)
   end
 
-  it "lets you remove a passenger from a flight" do
-    visit '/flights'
-
-    within(".flight-#{@flight1.id}") do
-      expect(page).to have_content(@passenger1.name)
-      expect(page).to have_content(@passenger2.name)
-      click_link("Remove This Passenger", :match => :first)
-      # expect(current_path).to eq("/passenger_flights/#{@flight1.id}/#{@passenger1.id}")
-
-    end
-    expect(page).to_not have_content(@passenger1.name)
-    expect(page).to have_content(@passenger2.name)
-  end
 end

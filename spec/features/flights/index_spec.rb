@@ -73,4 +73,12 @@ RSpec.describe 'flights index page' do
       expect(page).to_not have_content("#{@passenger_1.name}")
     end
   end
+
+  xit 'can remove a passenger from a flight' do
+    within "#passenger-#{@passenger_1.id}" do
+      click_link 'Remove Passenger'
+      expect(current_path).to eq('/flights')
+      expect(page).to_not have_content("#{@passenger_1.name}")
+    end
+  end
 end

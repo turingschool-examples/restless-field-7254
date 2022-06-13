@@ -18,7 +18,6 @@ RSpec.describe "Flight Index Page", type: :feature do
       expect(page).to have_content("Flight Number: 1427")
       expect(page).to have_content("Airline: Delta")
       expect(page).to have_content("Passenger: Joe")
-      expect(page).to have_content("Passenger: Eliza")
       expect(page).to_not have_content("Airline: American")
       expect(page).to_not have_content("Passenger: Dunkin")
       expect(page).to_not have_content("Passenger: Albert")
@@ -42,6 +41,28 @@ RSpec.describe "Flight Index Page", type: :feature do
       expect(page).to_not have_content("Passenger: Joe")
       expect(page).to_not have_content("Passenger: Eliza")
       expect(page).to_not have_content("Airline: Delta")
+    end
+  end
+
+  it "can has a link to remove a passenger from a flight" do
+    airline1 = Airline.create(name: "Delta")
+    flight1 = airline1.flights.create(number: 1427, date: "19 November 2022", departure_city: "Albuquerque", arrival_city: "Denver")
+    flight2 = airline1.flights.create(number: 1276, date: "20 November 2022", departure_city: "San Diego", arrival_city: "Washington D.C")
+    passenger1 = flight1.passengers.create(name: "Joe", age: 25)
+    passenger2 = flight1.passengers.create(name: "Eliza", age: 21)
+
+    visit '/flights'
+
+    within "#flights-#{flight1.id}" do
+      expect(page).to have_link("Remove #{passenger1.name}")
+      expect(page).to have_link("Remove #{passenger2.name}")
+      click_on "Remove #{passenger1.name}"
+
+      expect(current_path).to eq("/flights")
+
+      expect(page).to have_content("Passenger: #{passenger2.name}")
+      expect(page).to_not have_content("Passenger: #{passenger1.name}")
+
     end
   end
 end

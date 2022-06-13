@@ -114,60 +114,60 @@ by the number of flights each passenger has taken on the airline from most to le
 ```
 Airlines:
 
-Name: American
-Name: Delta
-Name: JetBlue
-Name: Southwest
-Name: United
+name: 'American'
+name: 'Delta'
+name: 'JetBlue'
+name: 'Southwest'
+name: 'United'
 
 
 Flights:
 
-Number: 7990
+number: 7990
 Date: 2/7/2022
-Departure City: Glendale
-Arrival City: Dallas
+Departure City: 'Glendale'
+Arrival City: 'Dallas'
 
 
-Number: 3940
+number: 3940
 Date: 3/10/2022
-Departure City: Detroit
-Arrival City: Orlando
+Departure City: 'Detroit'
+Arrival City: 'Orlando'
 
 
-Number: 9091
+number: 9091
 Date:  5/17/2022
-Departure City: Chicago
-Arrival City: Kansas City
+Departure City: 'Chicago'
+Arrival City: 'Kansas City'
 
 
-Number: 6798
+number: 6798
 Date:  10/9/2022
 Departure City: Tulsa
 Arrival City: Fresno
 
 
-Number: 9665
+number: 9665
 Date:  11/22/2022
 Departure City: Durham
-Arrival City: New Orleans
+Arrival City: new Orleans
 
 
 People: 
 
-Name: Brennan Lee Mulligan
+name: Brennan Lee Mulligan
 Age: 13
 
-Name: Aabria Iyengar
+name: Aabria Iyengar
 Age: 9
 
-Name: Bill Seacaster
+name: Bill Seacaster
 Age: 46
 
-Name: Misty Moore
+name: Misty Moore
 Age: 44
 
-Name: Kingston Brown
+name: Kingston Brown
 Age: 84
 
 ```

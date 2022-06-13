@@ -25,18 +25,29 @@ RSpec.describe Airline, type: :model do
       @passenger1.passenger_flights.create!(flight_id: @flight1.id)
       @passenger2.passenger_flights.create!(flight_id: @flight2.id)
       @passenger3.passenger_flights.create!(flight_id: @flight3.id)
+
       @passenger4.passenger_flights.create!(flight_id: @flight1.id)
-      @passenger5.passenger_flights.create!(flight_id: @flight2.id)
-      @passenger6.passenger_flights.create!(flight_id: @flight3.id)
       @passenger4.passenger_flights.create!(flight_id: @flight4.id)
+
       @passenger5.passenger_flights.create!(flight_id: @flight4.id)
+      @passenger5.passenger_flights.create!(flight_id: @flight2.id)
+      @passenger5.passenger_flights.create!(flight_id: @flight3.id)
+
+
+      @passenger6.passenger_flights.create!(flight_id: @flight3.id)
       @passenger6.passenger_flights.create!(flight_id: @flight4.id)
+      @passenger6.passenger_flights.create!(flight_id: @flight2.id)
+      @passenger6.passenger_flights.create!(flight_id: @flight1.id)
 
       @passenger7.passenger_flights.create!(flight_id: @flight5.id)
     end
 
     it 'can return an array of passengers who are over 18 and on a flight by this airline' do
       expect(@united.all_adult_passengers.pluck(:name)).to eq(["Casey", "Deannah", "Jimbob", "Parker", "Sally"]) #Set order to name to help accurately test outcome
+    end
+
+    it 'can return an array of passengers who are over 18 and on a flight by this airline, ordered by most flights taken' do
+      expect(@united.all_adult_passengers_sorted.pluck(:name)).to eq(["Casey", "Deannah", "Parker", "Jimbob", "Sally"])
     end
   end
 end

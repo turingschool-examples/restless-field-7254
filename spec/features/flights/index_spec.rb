@@ -21,7 +21,7 @@ RSpec.describe 'Flights Index' do
     @flight_passenger_6 = FlightPassenger.create!(flight_id: @flight_2.id, passenger_id: @deana.id)
   end
 
-  it 'displays all flight numbers, airline name, and names of passengers by flight' do
+  it 'displays all flight numbers, airline name' do
     visit "/flights"
     save_and_open_page
     expect(page).to have_content("All Flights Info")
@@ -31,22 +31,45 @@ RSpec.describe 'Flights Index' do
 
     within "#id-#{@flight_1.id}" do
       expect(page).to have_content("Number: 3124 Delta")
-      expect(page).to have_content("Sam")
-      expect(page).to have_content("Julia")
-      expect(page).to have_content("Horatio")
-      expect(page).to_not have_content("Deana")
     end
 
     within "#id-#{@flight_2.id}" do
       expect(page).to have_content("Number: 4352 Delta")
-      expect(page).to have_content("Sam")
-      expect(page).to have_content("Deana")
     end
 
     within "#id-#{@flight_3.id}" do
-      expect(page).to have_content("Number: 3124 Delta")
-      expect(page).to have_content("Horatio")
+      expect(page).to have_content("Number: 6467 Delta")
     end
 
+    it 'displays all passenger names by flight' do
+        visit "/flights"
+      within "#id-#{@flight_1.id}" do
+        expect(page).to have_content("Sam")
+        expect(page).to have_content("Julia")
+        expect(page).to have_content("Horatio")
+        expect(page).to_not have_content("Deana")
+      end
+
+      within "#id-#{@flight_2.id}" do
+        expect(page).to have_content("Sam")
+        expect(page).to have_content("Deana")
+      end
+
+    within "#id-#{@flight_3.id}" do
+      expect(page).to have_content("Horatio")
+    end
+end
+  end
+
+  it 'has a remove passenger button next to each passenger' do
+    visit "/flights"
+
+    within "#id-#{@flight_2.id}" do
+      expect(page).to have_content("Deana")
+      click_link "Remove #{@deana.name}"
+
+      expect(current_path).to eq("/flights")
+      expect(page).to_not have_content("Deana")
+    end
   end
 end

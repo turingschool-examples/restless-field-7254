@@ -2,12 +2,12 @@
 
 <% @flights.each do |flight| %>
   <div id="id-<%= flight.id %>">
-    <%= flight.number %>
-    <%= flight.airline.name %>
+    <p><strong><%= flight.number %></strong></p>
+    <p><strong><%= flight.airline.name %></strong></p>
       <% flight.passengers.each do |passenger| %>
-        <div id="id-<%= passenger.id %>">
+
             <%= passenger.name %>
-          </div>
-        </div>
+            <%= link_to "Remove #{passenger.name}", "/flights/#{flight.id}/passengers/#{passenger.id}/destroy" %>
         <% end %>
     <% end %>
+  </div>

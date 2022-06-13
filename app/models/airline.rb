@@ -3,6 +3,6 @@ class Airline < ApplicationRecord
   has_many :passengers, through: :flights
 
   def unique_adults
-    passengers.where("age >= ?", 18).distinct
+    passengers.where("age >= ?", 18).distinct.pluck(:name)
   end
 end
